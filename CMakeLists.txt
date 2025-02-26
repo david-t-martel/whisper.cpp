@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.10...3.31) # for add_link_options and implicit target directories.
 project("whisper.cpp" C CXX)
-project("whisper.cpp" VERSION 1.7.4)
-include(CheckIncludeFileCXX)
 
 # Ensure VCPKG_ROOT is set correctly at the top of your file
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED VCPKG_ROOT)
@@ -129,9 +127,9 @@ set(GGML_SANITIZE_UNDEFINED ${WHISPER_SANITIZE_UNDEFINED})
 set(GGML_ALL_WARNINGS ${WHISPER_ALL_WARNINGS})
 set(GGML_FATAL_WARNINGS ${WHISPER_FATAL_WARNINGS})
 
-# transition helpers
+# transition helpers - FIXED FUNCTION
 function(whisper_option_depr TYPE OLD NEW)
-    if(DEFINED ${OLD})
+    if(DEFINED ${OLD}) # Fixed: removed duplicate ${} - this was already correct
         message(${TYPE} "${OLD} is deprecated and will be removed in the future.\nUse ${NEW} instead\n")
         set(${NEW} ON PARENT_SCOPE)
     endif()
@@ -162,31 +160,83 @@ add_subdirectory(src)
 
 # Find required packages
 if(WHISPER_MIMALLOC)
-    # Use vcpkg-installed mimalloc
-    find_package(mimalloc CONFIG REQUIRED)
-    add_definitions(-DWHISPER_USE_MIMALLOC)
+    # Attempt to find mimalloc using multiple methods
 
-    # Add a variable to explicitly define the mimalloc binary path
-    set(MIMALLOC_BIN_DIR "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin" CACHE PATH "Path to mimalloc DLL")
+    # Method 1: Find using traditional CONFIG mode
+    find_package(mimalloc CONFIG QUIET)
 
-    # Add a call to mi_version in main.cpp to ensure mimalloc is loaded
-    target_compile_definitions(whisper PRIVATE WHISPER_CALL_MI_VERSION)
+    if(NOT mimalloc_FOUND)
+        # Method 2: Find using pkg-config
+        find_package(PkgConfig QUIET)
 
-    # Set the runtime path to include mimalloc
-    if(WIN32)
-        set_target_properties(whisper PROPERTIES
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-            VS_USER_PROPS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mimalloc.props")
+        if(PKG_CONFIG_FOUND)
+            pkg_check_modules(MIMALLOC QUIET mimalloc)
+        endif()
+    endif()
 
-        # Copy the mimalloc DLL to the output directory
-        add_custom_command(TARGET whisper POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${MIMALLOC_BIN_DIR}/mimalloc-redirect.dll"
-            "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/mimalloc-redirect.dll"
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${MIMALLOC_BIN_DIR}/mimalloc-override.dll"
-            "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/mimalloc-override.dll"
-            COMMENT "Copying mimalloc DLLs to output directory")
+    if(NOT mimalloc_FOUND AND NOT MIMALLOC_FOUND)
+        # Method 3: Find library and headers directly
+        find_library(MIMALLOC_LIBRARY
+            NAMES mimalloc mimalloc-static
+            PATHS
+            "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/lib"
+            "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib"
+        )
+
+        find_path(MIMALLOC_INCLUDE_DIR
+            NAMES mimalloc.h
+            PATHS
+            "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/include"
+            "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include"
+        )
+
+        if(MIMALLOC_LIBRARY AND MIMALLOC_INCLUDE_DIR)
+            set(MIMALLOC_FOUND TRUE)
+            message(STATUS "Found mimalloc manually: ${MIMALLOC_LIBRARY}")
+
+            # Create a custom imported target if needed
+            if(NOT TARGET mimalloc::mimalloc)
+                add_library(mimalloc::mimalloc UNKNOWN IMPORTED)
+                set_target_properties(mimalloc::mimalloc PROPERTIES
+                    IMPORTED_LOCATION "${MIMALLOC_LIBRARY}"
+                    INTERFACE_INCLUDE_DIRECTORIES "${MIMALLOC_INCLUDE_DIR}")
+            endif()
+        else()
+            message(WARNING "Could not find mimalloc, will fall back to system allocator")
+            set(WHISPER_MIMALLOC OFF)
+        endif()
+    endif()
+
+    # Define the mimalloc path for DLLs if found
+    if(mimalloc_FOUND OR MIMALLOC_FOUND)
+        message(STATUS "Using mimalloc allocator")
+        add_definitions(-DWHISPER_USE_MIMALLOC)
+
+        if(WIN32)
+            # Set the path to mimalloc DLLs
+            if(NOT DEFINED MIMALLOC_BIN_DIR)
+                if(DEFINED VCPKG_INSTALLED_DIR)
+                    set(MIMALLOC_BIN_DIR "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin"
+                        CACHE PATH "Path to mimalloc DLLs")
+                elseif(DEFINED VCPKG_ROOT)
+                    set(MIMALLOC_BIN_DIR "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin"
+                        CACHE PATH "Path to mimalloc DLLs")
+                endif()
+            endif()
+
+            # Add DLL handling directly here instead of at the end
+            if(TARGET whisper AND DEFINED MIMALLOC_BIN_DIR)
+                add_custom_command(TARGET whisper POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    "${MIMALLOC_BIN_DIR}/mimalloc-redirect.dll"
+                    "$<TARGET_FILE_DIR:whisper>/mimalloc-redirect.dll"
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    "${MIMALLOC_BIN_DIR}/mimalloc-override.dll"
+                    "$<TARGET_FILE_DIR:whisper>/mimalloc-override.dll"
+                    COMMENT "Copying mimalloc DLLs to output directory"
+                )
+            endif()
+        endif()
     endif()
 endif()
 
@@ -226,26 +276,55 @@ if(GGML_CUDA AND WHISPER_CUDA_API_WRAPPERS)
     endif()
 endif()
 
-# Add to CMakeLists.txt near line 169 (after the find_package calls)
-if(WHISPER_MIMALLOC)
-    # Link with mimalloc explicitly
-    target_link_libraries(whisper
-        PUBLIC
-        $<$<BOOL:${WHISPER_MIMALLOC}>:$<IF:$<TARGET_EXISTS:mimalloc>,mimalloc,mimalloc-static>>
-    )
-
-    # Add mimalloc DLL handling
-    if(WIN32)
-        add_custom_command(TARGET whisper POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin/mimalloc-redirect.dll"
-            "$<TARGET_FILE_DIR:whisper>/mimalloc-redirect.dll"
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin/mimalloc-override.dll"
-            "$<TARGET_FILE_DIR:whisper>/mimalloc-override.dll"
-        )
-    endif()
+#
+# programs, examples and tests
+#
+if(WHISPER_BUILD_TESTS AND NOT CMAKE_JS_VERSION)
+    # include(CTest)
+    # add_subdirectory(tests)
 endif()
+
+if(WHISPER_BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
+
+# Fixed: consolidated target_link_libraries for whisper
+target_link_libraries(whisper
+    PRIVATE
+    ggml
+    ${CMAKE_DL_LIBS}
+
+    PUBLIC
+
+    # Use the correct mimalloc target
+    $<$<AND:$<BOOL:${WHISPER_MIMALLOC}>,$<BOOL:${mimalloc_FOUND}>>:mimalloc::mimalloc>
+    $<$<AND:$<BOOL:${WHISPER_MIMALLOC}>,$<TARGET_EXISTS:mimalloc>>:mimalloc>
+    $<$<AND:$<BOOL:${WHISPER_MIMALLOC}>,$<TARGET_EXISTS:mimalloc-static>>:mimalloc-static>
+
+    # TBB
+    $<$<BOOL:${WHISPER_TBB}>:$<IF:$<TARGET_EXISTS:TBB::tbb>,TBB::tbb,${TBB_LIBRARY}>>
+
+    # CUDA API Wrappers
+    $<$<AND:$<BOOL:${GGML_CUDA}>,$<BOOL:${WHISPER_CUDA_API_WRAPPERS}>,$<BOOL:${cuda-api-wrappers_FOUND}>>:cuda::api_wrappers>
+
+    # Boost Stacktrace
+    $<$<BOOL:${WHISPER_BOOST_STACKTRACE}>:Boost::stacktrace_basic>
+)
+
+# 5. Make sure target_include_directories are set properly
+target_include_directories(whisper
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    $<$<BOOL:${WHISPER_BOOST_STACKTRACE}>:${BOOST_STACKTRACE_INCLUDE_DIR}>
+    $<$<BOOL:${WHISPER_TASKFLOW}>:${TASKFLOW_INCLUDE_DIR}>
+
+    # Add mimalloc include directories if needed and not handled by the target
+    $<$<AND:$<BOOL:${WHISPER_MIMALLOC}>,$<NOT:$<TARGET_EXISTS:mimalloc::mimalloc>>,$<NOT:$<TARGET_EXISTS:mimalloc>>,$<NOT:$<TARGET_EXISTS:mimalloc-static>>>:${MIMALLOC_INCLUDE_DIR}>
+)
 
 #
 # install
@@ -290,40 +369,3 @@ configure_file(cmake/whisper.pc.in
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/whisper.pc"
     DESTINATION lib/pkgconfig)
-
-#
-# programs, examples and tests
-#
-if(WHISPER_BUILD_TESTS AND NOT CMAKE_JS_VERSION)
-    # include(CTest)
-    # add_subdirectory(tests)
-endif()
-
-if(WHISPER_BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
-
-# Modify whisper target to link with the libraries
-target_link_libraries(whisper
-    PRIVATE
-    ggml
-    ${CMAKE_DL_LIBS}
-    PUBLIC
-
-    # Use the correct mimalloc target from vcpkg
-    $<$<BOOL:${WHISPER_MIMALLOC}>:$<IF:$<TARGET_EXISTS:mimalloc-static>,mimalloc-static,mimalloc>>
-    $<$<BOOL:${WHISPER_TBB}>:$<IF:$<TARGET_EXISTS:TBB::tbb>,TBB::tbb,${TBB_LIBRARY}>>
-    $<$<AND:$<BOOL:${GGML_CUDA}>,$<BOOL:${WHISPER_CUDA_API_WRAPPERS}>,$<BOOL:${cuda-api-wrappers_FOUND}>>:cuda::api_wrappers>
-    $<$<BOOL:${WHISPER_BOOST_STACKTRACE}>:Boost::stacktrace_basic>
-)
-
-# 5. Make sure target_include_directories are set properly
-target_include_directories(whisper
-    PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-    PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-    $<$<BOOL:${WHISPER_BOOST_STACKTRACE}>:${BOOST_STACKTRACE_INCLUDE_DIR}>
-    $<$<BOOL:${WHISPER_TASKFLOW}>:${TASKFLOW_INCLUDE_DIR}>
-)
