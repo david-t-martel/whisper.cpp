@@ -3,11 +3,15 @@ project("whisper.cpp" C CXX)
 project("whisper.cpp" VERSION 1.7.4)
 include(CheckIncludeFileCXX)
 
-# Improve VCPKG integration
+# Ensure VCPKG_ROOT is set correctly at the top of your file
+if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED VCPKG_ROOT)
+    set(VCPKG_ROOT "$ENV{VCPKG_ROOT}" CACHE STRING "vcpkg root directory")
+    message(STATUS "Setting VCPKG_ROOT to ${VCPKG_ROOT}")
+endif()
 
-# 1. Update VCPKG integration section (near the top, replace existing section)
-if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+# Make sure the toolchain file is explicitly set
+if(DEFINED VCPKG_ROOT AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         CACHE STRING "")
     message(STATUS "Using vcpkg toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
 endif()
@@ -126,8 +130,8 @@ set(GGML_ALL_WARNINGS ${WHISPER_ALL_WARNINGS})
 set(GGML_FATAL_WARNINGS ${WHISPER_FATAL_WARNINGS})
 
 # transition helpers
-function(whisper_option_depr(TYPE OLD NEW))
-    if(${OLD})
+function(whisper_option_depr TYPE OLD NEW)
+    if(DEFINED ${OLD})
         message(${TYPE} "${OLD} is deprecated and will be removed in the future.\nUse ${NEW} instead\n")
         set(${NEW} ON PARENT_SCOPE)
     endif()
@@ -158,12 +162,32 @@ add_subdirectory(src)
 
 # Find required packages
 if(WHISPER_MIMALLOC)
-    # Use vcpkg-installed mimalloc instead of hardcoded path
+    # Use vcpkg-installed mimalloc
     find_package(mimalloc CONFIG REQUIRED)
     add_definitions(-DWHISPER_USE_MIMALLOC)
 
+    # Add a variable to explicitly define the mimalloc binary path
+    set(MIMALLOC_BIN_DIR "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin" CACHE PATH "Path to mimalloc DLL")
+
     # Add a call to mi_version in main.cpp to ensure mimalloc is loaded
     target_compile_definitions(whisper PRIVATE WHISPER_CALL_MI_VERSION)
+
+    # Set the runtime path to include mimalloc
+    if(WIN32)
+        set_target_properties(whisper PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+            VS_USER_PROPS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mimalloc.props")
+
+        # Copy the mimalloc DLL to the output directory
+        add_custom_command(TARGET whisper POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${MIMALLOC_BIN_DIR}/mimalloc-redirect.dll"
+            "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/mimalloc-redirect.dll"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${MIMALLOC_BIN_DIR}/mimalloc-override.dll"
+            "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/mimalloc-override.dll"
+            COMMENT "Copying mimalloc DLLs to output directory")
+    endif()
 endif()
 
 if(WHISPER_TBB)

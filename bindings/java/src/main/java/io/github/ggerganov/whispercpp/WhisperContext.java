@@ -3,7 +3,6 @@ package io.github.ggerganov.whispercpp;
 import com.sun.jna.Structure;
 import com.sun.jna.ptr.PointerByReference;
 import io.github.ggerganov.whispercpp.ggml.GgmlType;
-import io.github.ggerganov.whispercpp.WhisperModel;
 import io.github.ggerganov.whispercpp.params.WhisperContextParams;
 
 import java.util.List;
@@ -17,10 +16,10 @@ public class WhisperContext extends Structure {
     /** intermediate type (FP32 or FP16) */
     GgmlType itype = GgmlType.GGML_TYPE_F16;
 
-//    WhisperModel model;
+    // WhisperModel model;
     public PointerByReference model;
-//    whisper_vocab vocab;
-//    whisper_state * state = nullptr;
+    // whisper_vocab vocab;
+    // whisper_state * state = nullptr;
     public PointerByReference vocab;
     public PointerByReference state;
 
@@ -28,14 +27,17 @@ public class WhisperContext extends Structure {
     String path_model;
     WhisperContextParams params;
 
-//    public static class ByReference extends WhisperContext implements Structure.ByReference {
-//    }
-//
-//    public static class ByValue extends WhisperContext implements Structure.ByValue {
-//    }
-//
-//    @Override
-//    protected List<String> getFieldOrder() {
-//        return List.of("t_load_us", "t_start_us", "wtype", "itype", "model", "vocab", "state", "path_model");
-//    }
+    // public static class ByReference extends WhisperContext implements
+    // Structure.ByReference {
+    // }
+    //
+    // public static class ByValue extends WhisperContext implements
+    // Structure.ByValue {
+    // }
+    //
+    // @Override
+    // protected List<String> getFieldOrder() {
+    // return List.of("t_load_us", "t_start_us", "wtype", "itype", "model", "vocab",
+    // "state", "path_model");
+    // }
 }
