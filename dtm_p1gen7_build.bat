@@ -85,6 +85,8 @@ REM Set unified CUDA compilation flags
 set "CUDA_HOST_COMPILER=cl.exe"
 set "CUDA_PROPAGATE_HOST_FLAGS=off"
 set "CUDA_NVCC_FLAGS=--use_fast_math;-O3;--threads=%NUM_CORES%;--disable-warnings"
+REM Set CUDA warning flags
+set "CUDA_NVCC_FLAGS=%CUDA_NVCC_FLAGS%;--diag-suppress=221"
 set "CUDAFE_FLAGS=--display_error_number"
 
 REM CUDA optimization settings
@@ -202,7 +204,7 @@ cmake -G "Ninja" -B build ^
     -DCMAKE_CUDA_COMPILER="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/bin/nvcc.exe" ^
     -DCMAKE_CUDA_HOST_COMPILER=cl.exe ^
     -DCMAKE_CUDA_ARCHITECTURES=%CUDA_ARCH% ^
-    -DCMAKE_CUDA_FLAGS="-arch=sm_%CUDA_ARCH%" ^
+    -DCMAKE_CUDA_FLAGS="-arch=sm_%CUDA_ARCH% -Xcudafe=\"--display_error_number --diag_suppress=221\"" ^
     -DCMAKE_CUDA_FLAGS_RELEASE="-O3" ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL ^
@@ -230,7 +232,13 @@ cmake -G "Ninja" -B build ^
     -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON ^
     -DWHISPER_MIMALLOC=ON ^
     -DWHISPER_LIBSNDFILE=ON ^
-    -DWHISPER_SERVER_CPPRESTSDK=ON
+    -DWHISPER_SERVER_CPPRESTSDK=ON ^
+    -DWHISPER_TBB=ON ^
+    -DUSE_MIMALLOC=ON ^
+-DWHISPER_MIMALLOC=ON ^
+-DWHISPER_BUILD_TESTS=ON ^
+-DWHISPER_USE_CMOCKA=ON ^
+-DWHISPER_SERVER_CPPRESTSDK=ON ^
 
 REM Check for CMake errors
 if errorlevel 1 (
