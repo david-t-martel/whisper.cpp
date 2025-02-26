@@ -2,9 +2,114 @@
 
 #include "ggml-cpu.h"
 
+// Add exception handler with stacktrace
+#ifdef WHISPER_USE_BOOST_STACKTRACE
+static void whisper_handle_exception(const std::exception &e)
+{
+    std::string error_message = std::string("Exception: ") + e.what() +
+                                "\nStack trace:\n" +
+                                boost::stacktrace::to_string(boost::stacktrace::stacktrace());
+
+    WHISPER_LOG_ERROR("%s", error_message.c_str());
+}
+#endif
+
 #include "ggml.h"
 #include "ggml-alloc.h"
 #include "ggml-backend.h"
+
+#ifdef WHISPER_USE_LIBSNDFILE
+#include <sndfile.h>
+
+// Read audio files using libsndfile
+static std::vector<float> whisper_read_audio_file(const char *filename, int *sample_rate)
+{
+    std::vector<float> pcmf32;
+
+    SF_INFO info;
+    memset(&info, 0, sizeof(info));
+
+    SNDFILE *file = sf_open(filename, SFM_READ, &info);
+    if (!file)
+    {
+        WHISPER_LOG_ERROR("Failed to open audio file: %s\n", filename);
+        WHISPER_LOG_ERROR("libsndfile error: %s\n", sf_strerror(file));
+        return pcmf32;
+    }
+
+    *sample_rate = info.samplerate;
+
+    pcmf32.resize(info.frames * info.channels);
+    sf_readf_float(file, pcmf32.data(), info.frames);
+    sf_close(file);
+
+    // Convert stereo to mono if needed
+    if (info.channels == 2)
+    {
+        std::vector<float> pcmf32_mono(info.frames);
+        for (int i = 0; i < info.frames; i++)
+        {
+            pcmf32_mono[i] = 0.5f * (pcmf32[2 * i] + pcmf32[2 * i + 1]);
+        }
+        return pcmf32_mono;
+    }
+
+    return pcmf32;
+}
+#endif
+
+// Add to the includes section at the top
+#ifdef WHISPER_USE_TBB
+#include <tbb/tbb.h>
+#include <tbb/parallel_for.h>
+#include <tbb/task_arena.h>
+#endif
+
+// Implement TBB version of the log_mel_spectrogram_worker
+#ifdef WHISPER_USE_TBB
+static void log_mel_spectrogram_tbb(const float *hann, const std::vector<float> &samples,
+                                    int n_samples, int frame_size, int frame_step,
+                                    const whisper_filters &filters, whisper_mel &mel)
+{
+    const int n_fft = filters.n_fft;
+    const int n_mel = filters.n_mel;
+    const int n_frames = (n_samples + frame_step / 2) / frame_step;
+
+    mel.n_mel = n_mel;
+    mel.n_len = n_frames;
+    mel.data.resize(n_mel * n_frames);
+
+    // TBB parallel implementation
+    tbb::parallel_for(0, n_frames, [&](int iframe)
+                      {
+        // Frame position in the original signal
+        int offset = iframe * frame_step;
+
+        // Apply Hann window and compute FFT
+        std::vector<float> fft_in(n_fft, 0.0f);
+        for (int i = 0; i < frame_size; i++) {
+            if (offset + i < n_samples) {
+                fft_in[i] = samples[offset + i] * hann[i];
+            }
+        }
+
+        // Compute FFT
+        std::vector<float> fft_out(2 * n_fft);
+        fft(fft_in.data(), n_fft, fft_out.data());
+
+        // Apply mel filters and compute log mel spectrogram
+        for (int im = 0; i < n_mel; im++) {
+            double sum = 0.0;
+            for (int i = 0; i < n_fft; i++) {
+                const float re = fft_out[2*i + 0];
+                const float im = fft_out[2*i + 1];
+                const float pow = re*re + im*im;
+                sum += pow * filters.data[im*n_fft + i];
+            }
+            mel.data[iframe*n_mel + im] = sum > 1e-10 ? log10(sum) : -10.0f;
+        } });
+}
+#endif
 
 // Add at the beginning of whisper.cpp after existing includes
 #ifdef WHISPER_USE_BOOST_STACKTRACE
@@ -77,18 +182,71 @@ static void whisper_free(void *ptr)
 #if defined(WHISPER_USE_CUDA_API_WRAPPERS) && defined(GGML_CUDA)
 #include <cuda_api_wrappers.h>
 
-// Add improved CUDA error handling
+// Enhanced CUDA error reporting and handling
 static bool whisper_cuda_check_error(const char *func_name, const char *file, int line)
 {
     cudaError_t error = cudaGetLastError();
     if (error != cudaSuccess)
     {
-        WHISPER_LOG_ERROR("CUDA error in %s at %s:%d: %s\n",
+        WHISPER_LOG_ERROR("CUDA error in %s at %s:%d: %s (code %d)\n",
                           func_name, file, line,
-                          cuda::error::detail::get_error_string(error));
+                          cuda::error::detail::get_error_string(error),
+                          static_cast<int>(error));
+
+        // Get device properties for better diagnostics
+        try
+        {
+            auto current_device = cuda::device::current::get();
+            auto properties = current_device.properties();
+
+            WHISPER_LOG_ERROR("CUDA device: %s (compute capability %d.%d)\n",
+                              properties.name.data(),
+                              properties.compute_capability.major,
+                              properties.compute_capability.minor);
+
+            WHISPER_LOG_ERROR("CUDA memory: total=%zu MB, free=%zu MB\n",
+                              current_device.memory().total() / (1024 * 1024),
+                              current_device.memory().free() / (1024 * 1024));
+        }
+        catch (...)
+        {
+            WHISPER_LOG_ERROR("Failed to get CUDA device properties\n");
+        }
+
         return false;
     }
     return true;
+}
+
+// Memory management using CUDA API Wrappers
+static void *whisper_cuda_malloc(size_t size)
+{
+    void *ptr = nullptr;
+    try
+    {
+        auto current_device = cuda::device::current::get();
+        ptr = current_device.memory().allocate(size);
+    }
+    catch (const cuda::error::runtime_error &e)
+    {
+        WHISPER_LOG_ERROR("CUDA memory allocation failed: %s\n", e.what());
+    }
+    return ptr;
+}
+
+static void whisper_cuda_free(void *ptr)
+{
+    if (ptr)
+    {
+        try
+        {
+            cuda::memory::device::free(ptr);
+        }
+        catch (const cuda::error::runtime_error &e)
+        {
+            WHISPER_LOG_ERROR("CUDA memory free failed: %s\n", e.what());
+        }
+    }
 }
 
 #define WHISPER_CUDA_CHECK(func)                                  \
@@ -184,7 +342,14 @@ int whisper_pcm_to_mel(struct whisper_context *ctx, const float *samples, int n_
         return -1;
     }
 
-#ifdef WHISPER_USE_TASKFLOW
+#ifdef WHISPER_USE_TBB
+    ctx->state->tbb_arena.execute([&]
+                                  {
+        // Compute mel spectrogram using TBB
+        // Existing setup code...
+        log_mel_spectrogram_tbb(hann.data(), pcmf32, n_samples, n_fft, hop_length, ctx->model.filters, ctx->state->mel); });
+    return 0;
+#elif defined(WHISPER_USE_TASKFLOW)
     if (n_threads > 1)
     {
         return whisper_pcm_to_mel_with_taskflow(ctx, ctx->state, samples, n_samples, n_threads) ? 0 : -1;
@@ -299,6 +464,9 @@ static void byteswap_tensor(ggml_tensor *tensor)
 //
 
 WHISPER_ATTRIBUTE_FORMAT(2, 3)
+// Update the error logging functions to use stacktrace
+
+WHISPER_ATTRIBUTE_FORMAT(2, 3)
 static void whisper_log_internal(ggml_log_level level, const char *format, ...)
 {
     va_list args;
@@ -307,6 +475,7 @@ static void whisper_log_internal(ggml_log_level level, const char *format, ...)
     char buffer[1024];
     vsnprintf(buffer, sizeof(buffer), format, args);
 
+#ifdef WHISPER_USE_BOOST_STACKTRACE
     if (level == GGML_LOG_LEVEL_ERROR)
     {
         // Add stacktrace for errors
@@ -318,6 +487,9 @@ static void whisper_log_internal(ggml_log_level level, const char *format, ...)
     {
         g_state.log_callback(level, buffer, g_state.log_callback_user_data);
     }
+#else
+    g_state.log_callback(level, buffer, g_state.log_callback_user_data);
+#endif
 
     va_end(args);
 }

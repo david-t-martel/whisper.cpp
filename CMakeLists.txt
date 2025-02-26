@@ -3,11 +3,26 @@ project("whisper.cpp" C CXX)
 project("whisper.cpp" VERSION 1.7.4)
 include(CheckIncludeFileCXX)
 
-# Add VCPKG support
+# Improve VCPKG integration
+
+# 1. Update VCPKG integration section (near the top, replace existing section)
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         CACHE STRING "")
     message(STATUS "Using vcpkg toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
+endif()
+
+# Make sure VCPKG_TARGET_TRIPLET is set if not defined
+if(NOT DEFINED VCPKG_TARGET_TRIPLET AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+    if(WIN32)
+        set(VCPKG_TARGET_TRIPLET "x64-windows" CACHE STRING "")
+    elseif(APPLE)
+        set(VCPKG_TARGET_TRIPLET "x64-osx" CACHE STRING "")
+    else()
+        set(VCPKG_TARGET_TRIPLET "x64-linux" CACHE STRING "")
+    endif()
+
+    message(STATUS "Setting VCPKG_TARGET_TRIPLET to ${VCPKG_TARGET_TRIPLET}")
 endif()
 
 set(SOVERSION 1)
@@ -93,10 +108,11 @@ option(WHISPER_COREML "whisper: enable Core ML framework" OFF)
 option(WHISPER_COREML_ALLOW_FALLBACK "whisper: allow non-CoreML fallback" OFF)
 option(WHISPER_OPENVINO "whisper: support for OpenVINO" OFF)
 
-# Add new options after existing options
+# Add new options for additional libraries
 option(WHISPER_MIMALLOC "whisper: use mimalloc allocator" ON)
+option(WHISPER_TBB "whisper: use Intel TBB" ON)
 option(WHISPER_BOOST_STACKTRACE "whisper: use boost stacktrace for error reporting" ON)
-option(WHISPER_TASKFLOW "whisper: use taskflow for thread management" ON)
+option(WHISPER_CUDA_API_WRAPPERS "whisper: use CUDA API wrappers" ON)
 
 # Required for relocatable CMake package
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/build-info.cmake)
@@ -110,13 +126,14 @@ set(GGML_ALL_WARNINGS ${WHISPER_ALL_WARNINGS})
 set(GGML_FATAL_WARNINGS ${WHISPER_FATAL_WARNINGS})
 
 # transition helpers
-function(whisper_option_depr TYPE OLD NEW)
+function(whisper_option_depr(TYPE OLD NEW))
     if(${OLD})
         message(${TYPE} "${OLD} is deprecated and will be removed in the future.\nUse ${NEW} instead\n")
-        set(${NEW} ON)
+        set(${NEW} ON PARENT_SCOPE)
     endif()
 endfunction()
 
+# Call the function from outside its definition
 whisper_option_depr(FATAL_ERROR WHISPER_CUBLAS GGML_CUDA)
 whisper_option_depr(WARNING WHISPER_CUDA GGML_CUDA)
 whisper_option_depr(WARNING WHISPER_KOMPUTE GGML_KOMPUTE)
@@ -139,23 +156,45 @@ endif()
 
 add_subdirectory(src)
 
-# Add find_package commands
+# Find required packages
 if(WHISPER_MIMALLOC)
+    # Use vcpkg-installed mimalloc instead of hardcoded path
     find_package(mimalloc CONFIG REQUIRED)
     add_definitions(-DWHISPER_USE_MIMALLOC)
+
+    # Add a call to mi_version in main.cpp to ensure mimalloc is loaded
+    target_compile_definitions(whisper PRIVATE WHISPER_CALL_MI_VERSION)
+endif()
+
+if(WHISPER_TBB)
+    find_package(TBB CONFIG QUIET)
+
+    if(NOT TBB_FOUND)
+        find_library(TBB_LIBRARY tbb REQUIRED)
+        find_path(TBB_INCLUDE_DIR tbb/tbb.h REQUIRED)
+        add_library(TBB::tbb UNKNOWN IMPORTED)
+        set_target_properties(TBB::tbb PROPERTIES
+            IMPORTED_LOCATION "${TBB_LIBRARY}"
+            INTERFACE_INCLUDE_DIRECTORIES "${TBB_INCLUDE_DIR}")
+    endif()
+
+    add_definitions(-DWHISPER_USE_TBB)
 endif()
 
 if(WHISPER_BOOST_STACKTRACE)
+    find_path(BOOST_STACKTRACE_INCLUDE_DIR boost/stacktrace.hpp REQUIRED)
+    include_directories(${BOOST_STACKTRACE_INCLUDE_DIR})
     find_package(Boost REQUIRED COMPONENTS stacktrace_basic)
     add_definitions(-DWHISPER_USE_BOOST_STACKTRACE)
 endif()
 
-if(WHISPER_TASKFLOW)
-    find_package(Taskflow CONFIG REQUIRED)
+if(DEFINED WHISPER_TASKFLOW)
+    find_path(TASKFLOW_INCLUDE_DIR taskflow/taskflow.hpp REQUIRED)
+    include_directories(${TASKFLOW_INCLUDE_DIR})
     add_definitions(-DWHISPER_USE_TASKFLOW)
 endif()
 
-if(GGML_CUDA)
+if(GGML_CUDA AND WHISPER_CUDA_API_WRAPPERS)
     find_package(cuda-api-wrappers CONFIG)
 
     if(cuda-api-wrappers_FOUND)
@@ -226,22 +265,20 @@ target_link_libraries(whisper
     ${CMAKE_DL_LIBS}
     PUBLIC
 
-    # ... existing libraries
+    # Use the correct mimalloc target from vcpkg
+    $<$<BOOL:${WHISPER_MIMALLOC}>:$<IF:$<TARGET_EXISTS:mimalloc-static>,mimalloc-static,mimalloc>>
+    $<$<BOOL:${WHISPER_TBB}>:$<IF:$<TARGET_EXISTS:TBB::tbb>,TBB::tbb,${TBB_LIBRARY}>>
+    $<$<AND:$<BOOL:${GGML_CUDA}>,$<BOOL:${WHISPER_CUDA_API_WRAPPERS}>,$<BOOL:${cuda-api-wrappers_FOUND}>>:cuda::api_wrappers>
+    $<$<BOOL:${WHISPER_BOOST_STACKTRACE}>:Boost::stacktrace_basic>
 )
 
-# Add conditionals for new libraries
-if(WHISPER_MIMALLOC)
-    target_link_libraries(whisper PUBLIC mimalloc)
-endif()
-
-if(WHISPER_BOOST_STACKTRACE)
-    target_link_libraries(whisper PUBLIC Boost::stacktrace_basic)
-endif()
-
-if(WHISPER_TASKFLOW)
-    target_link_libraries(whisper PUBLIC Taskflow::Taskflow)
-endif()
-
-if(GGML_CUDA AND cuda-api-wrappers_FOUND)
-    target_link_libraries(whisper PUBLIC cuda::api_wrappers)
-endif()
+# 5. Make sure target_include_directories are set properly
+target_include_directories(whisper
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    $<$<BOOL:${WHISPER_BOOST_STACKTRACE}>:${BOOST_STACKTRACE_INCLUDE_DIR}>
+    $<$<BOOL:${WHISPER_TASKFLOW}>:${TASKFLOW_INCLUDE_DIR}>
+)
