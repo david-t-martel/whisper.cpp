@@ -84,9 +84,7 @@ echo Using CUDA architecture: sm_%CUDA_ARCH%
 REM Set unified CUDA compilation flags
 set "CUDA_HOST_COMPILER=cl.exe"
 set "CUDA_PROPAGATE_HOST_FLAGS=off"
-set "CUDA_NVCC_FLAGS=--use_fast_math;-O3;--threads=%NUM_CORES%;--disable-warnings"
-REM Set CUDA warning flags
-set "CUDA_NVCC_FLAGS=%CUDA_NVCC_FLAGS%;--diag-suppress=221"
+set "CUDA_NVCC_FLAGS=--use_fast_math;-O3;--threads=%NUM_CORES%;--disable-warnings;--diag-suppress=221"
 set "CUDAFE_FLAGS=--display_error_number"
 
 REM CUDA optimization settings
@@ -98,7 +96,7 @@ set "CUDA_AUTO_BOOST=1"
 set "CUDA_MANAGED_FORCE_DEVICE_ALLOC=1"
 set "CUDA_DEVICE_ORDER=PCI_BUS_ID"
 set "CUDA_VISIBLE_DEVICES=0"
-set "CUDA_ERROR_REPORTING=0"
+set "CUDA_ERROR_REPORTING=1"
 
 REM Set GGML CUDA optimizations
 set "GGML_CUDA_FORCE_DMMV=1"
@@ -107,6 +105,14 @@ set "GGML_CUDA_DMMV_X=32"
 set "GGML_CUDA_MMV_Y=1"
 set "CUDA_FORCE_BLAS_KERNELS=1"
 set "CUDA_ALLOC_ALWAYS_MALLOC=1"
+
+REM Check CUDA compiler version
+echo Checking CUDA compiler version...
+"%CUDA_PATH%\bin\nvcc" --version
+if errorlevel 1 (
+    echo Error: CUDA compiler version check failed
+    exit /b 1
+)
 
 REM -----------------------------------------------------------
 REM 4. SYSTEM OPTIMIZATION
@@ -233,7 +239,6 @@ cmake -G "Ninja" -B build ^
     -DWHISPER_MIMALLOC=ON ^
     -DWHISPER_LIBSNDFILE=ON ^
     -DWHISPER_SERVER_CPPRESTSDK=ON ^
-    -DWHISPER_TBB=ON ^
     -DUSE_MIMALLOC=ON ^
 -DWHISPER_MIMALLOC=ON ^
 -DWHISPER_BUILD_TESTS=ON ^
@@ -253,6 +258,10 @@ ninja --version
 REM -----------------------------------------------------------
 REM 7. BUILD EXECUTION
 REM -----------------------------------------------------------
+
+REM Add before build command
+set "CUDA_DEVICE_HEAP_SIZE=2048"
+set "CUDA_DEVICE_MAX_CONNECTIONS=32"
 
 REM Build with Ninja
 cmake --build build --parallel %NUM_CORES%
