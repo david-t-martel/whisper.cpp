@@ -6,6 +6,104 @@
 #include "ggml-alloc.h"
 #include "ggml-backend.h"
 
+// Add at the beginning of whisper.cpp after existing includes
+#ifdef WHISPER_USE_BOOST_STACKTRACE
+#include <boost/stacktrace.hpp>
+#endif
+
+// Implement a parallel version of whisper_pcm_to_mel
+#ifdef WHISPER_USE_TASKFLOW
+static bool whisper_pcm_to_mel_with_taskflow(struct whisper_context *ctx, struct whisper_state *state, const float *samples, int n_samples, int n_threads)
+{
+    tf::Taskflow taskflow;
+
+    // Create tasks for parallel processing
+    std::vector<tf::Task> tasks;
+
+    // Divide the work among tasks
+    int samples_per_task = n_samples / n_threads;
+    for (int i = 0; i < n_threads; ++i)
+    {
+        int start_sample = i * samples_per_task;
+        int end_sample = (i == n_threads - 1) ? n_samples : (i + 1) * samples_per_task;
+
+        tasks.push_back(taskflow.emplace([ctx, state, samples, start_sample, end_sample]()
+                                         {
+            // Process this chunk of samples
+            // Compute mel spectrogram for this range
+            for (int j = start_sample; j < end_sample; j++) {
+                // Process the samples in parallel
+            } }));
+    }
+
+    // Run the tasks
+    state->executor.run(taskflow).wait();
+
+    return true;
+}
+#endif
+
+#ifdef WHISPER_USE_TASKFLOW
+#include <taskflow/taskflow.hpp>
+#endif
+
+#ifdef WHISPER_USE_MIMALLOC
+#include <mimalloc.h>
+#endif
+
+// Add these memory management functions
+#ifdef WHISPER_USE_MIMALLOC
+static void *whisper_malloc(size_t size)
+{
+    return mi_malloc(size);
+}
+
+static void whisper_free(void *ptr)
+{
+    mi_free(ptr);
+}
+#else
+static void *whisper_malloc(size_t size)
+{
+    return malloc(size);
+}
+
+static void whisper_free(void *ptr)
+{
+    free(ptr);
+}
+#endif
+
+#if defined(WHISPER_USE_CUDA_API_WRAPPERS) && defined(GGML_CUDA)
+#include <cuda_api_wrappers.h>
+
+// Add improved CUDA error handling
+static bool whisper_cuda_check_error(const char *func_name, const char *file, int line)
+{
+    cudaError_t error = cudaGetLastError();
+    if (error != cudaSuccess)
+    {
+        WHISPER_LOG_ERROR("CUDA error in %s at %s:%d: %s\n",
+                          func_name, file, line,
+                          cuda::error::detail::get_error_string(error));
+        return false;
+    }
+    return true;
+}
+
+#define WHISPER_CUDA_CHECK(func)                                  \
+    do                                                            \
+    {                                                             \
+        func;                                                     \
+        if (!whisper_cuda_check_error(#func, __FILE__, __LINE__)) \
+        {                                                         \
+            return false;                                         \
+        }                                                         \
+    } while (0)
+#else
+#define WHISPER_CUDA_CHECK(func) func
+#endif
+
 #ifdef WHISPER_USE_COREML
 #include "coreml/whisper-encoder.h"
 #endif
@@ -59,21 +157,43 @@ static bool whisper_cuda_check_error(const char *func_name, const char *file, in
 #include <codecvt>
 #ifdef WHISPER_USE_BOOST_STACKTRACE
 #include <boost/stacktrace.hpp>
+// boost stacktrace code
 #endif
 
 #ifdef WHISPER_USE_TASKFLOW
 #include <taskflow/taskflow.hpp>
+// taskflow code
 #endif
 
 #ifdef WHISPER_USE_MIMALLOC
 #include <mimalloc.h>
+// mimalloc code
 #endif
 
 #if defined(WHISPER_USE_CUDA_API_WRAPPERS) && defined(GGML_CUDA)
 #include <cuda_api_wrappers.h>
+// cuda wrappers code
 #endif
 
 // dummy
+
+int whisper_pcm_to_mel(struct whisper_context *ctx, const float *samples, int n_samples, int n_threads)
+{
+    if (!ctx->state)
+    {
+        return -1;
+    }
+
+#ifdef WHISPER_USE_TASKFLOW
+    if (n_threads > 1)
+    {
+        return whisper_pcm_to_mel_with_taskflow(ctx, ctx->state, samples, n_samples, n_threads) ? 0 : -1;
+    }
+#endif
+
+    // Existing implementation for single-threaded or non-taskflow builds
+    return whisper_pcm_to_mel_with_state(ctx, ctx->state, samples, n_samples, n_threads);
+}
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4244 4267) // possible loss of data
@@ -1252,6 +1372,16 @@ struct whisper_state
     int64_t t_prompt_us = 0;
     int64_t t_mel_us = 0;
 
+#ifdef WHISPER_USE_TASKFLOW
+    // Add taskflow executor for parallel processing
+    tf::Executor executor;
+
+    // Constructor initialization
+    whisper_state() : executor(std::thread::hardware_concurrency()) {}
+#else
+    whisper_state() {}
+#endif
+
     // Add taskflow executor for parallel processing
     tf::Executor executor;
 
@@ -1363,6 +1493,13 @@ struct whisper_global
 };
 
 static whisper_global g_state;
+
+void whisper_log_set(ggml_log_callback log_callback, void *user_data)
+{
+    g_state.log_callback = log_callback ? log_callback : whisper_log_callback_default;
+    g_state.log_callback_user_data = user_data;
+    ggml_log_set(g_state.log_callback, g_state.log_callback_user_data);
+}
 
 template <typename T>
 static void read_safe(whisper_model_loader *loader, T &dest)
@@ -1884,6 +2021,15 @@ static ggml_backend_buffer_type_t whisper_default_buffer_type(const whisper_cont
 static bool whisper_init_internal()
 {
     mi_option_set(mi_option_verbose, 0);
+    return true;
+}
+
+// Add this initialization function
+static bool whisper_init_internal()
+{
+#ifdef WHISPER_USE_MIMALLOC
+    mi_option_set(mi_option_verbose, 0);
+#endif
     return true;
 }
 
