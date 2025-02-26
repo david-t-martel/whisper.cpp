@@ -226,6 +226,27 @@ if(GGML_CUDA AND WHISPER_CUDA_API_WRAPPERS)
     endif()
 endif()
 
+# Add to CMakeLists.txt near line 169 (after the find_package calls)
+if(WHISPER_MIMALLOC)
+    # Link with mimalloc explicitly
+    target_link_libraries(whisper
+        PUBLIC
+        $<$<BOOL:${WHISPER_MIMALLOC}>:$<IF:$<TARGET_EXISTS:mimalloc>,mimalloc,mimalloc-static>>
+    )
+
+    # Add mimalloc DLL handling
+    if(WIN32)
+        add_custom_command(TARGET whisper POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin/mimalloc-redirect.dll"
+            "$<TARGET_FILE_DIR:whisper>/mimalloc-redirect.dll"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/bin/mimalloc-override.dll"
+            "$<TARGET_FILE_DIR:whisper>/mimalloc-override.dll"
+        )
+    endif()
+endif()
+
 #
 # install
 #

@@ -2,6 +2,13 @@ REM filepath: /C:/codedev/whisper.cpp/dtm_p1gen7_build.bat
 @echo off
 setlocal enabledelayedexpansion
 
+REM Set environment variables
+set "VCPKG_ROOT=C:\codedev\vcpkg"
+set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
+set "CUDA_ARCH=89"  REM Ada Lovelace architecture (RTX 40xx)
+set "OPENVINO_PATH=C:\Program Files (x86)\Intel\openvino_2024.6.0"
+set "NUM_CORES=%NUMBER_OF_PROCESSORS%"
+
 REM -----------------------------------------------------------
 REM 1. ENVIRONMENT VERIFICATION
 REM -----------------------------------------------------------
@@ -192,6 +199,20 @@ echo Installing vcpkg dependencies...
 REM Add vcpkg packages to path
 set "PATH=%VCPKG_ROOT%\installed\x64-windows\bin;%PATH%"
 
+REM Install vcpkg packages if not already installed
+echo Installing required vcpkg packages...
+"%VCPKG_ROOT%\vcpkg" install ^
+   mimalloc:x64-windows ^
+   tbb:x64-windows ^
+   libsndfile:x64-windows ^
+   boost-stacktrace:x64-windows ^
+   cuda-api-wrappers:x64-windows ^
+   taskflow:x64-windows ^
+   sdl2:x64-windows ^
+   curl:x64-windows ^
+   cpprestsdk:x64-windows ^
+   --triplet=x64-windows
+
 REM -----------------------------------------------------------
 REM 6. CMAKE CONFIGURATION
 REM -----------------------------------------------------------
@@ -205,6 +226,8 @@ cmake -G "Ninja" -B build ^
     -DCMAKE_POLICY_DEFAULT_CMP0104=NEW ^
     -DCMAKE_MINIMUM_REQUIRED_VERSION="3.10" ^
     -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
+    -DVCPKG_TARGET_TRIPLET=x64-windows ^
+    -DVCPKG_INSTALLED_DIR="%VCPKG_ROOT%\installed" ^
     -DCMAKE_C_COMPILER=cl.exe ^
     -DCMAKE_CXX_COMPILER=cl.exe ^
     -DCMAKE_CUDA_COMPILER="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/bin/nvcc.exe" ^
@@ -222,6 +245,7 @@ cmake -G "Ninja" -B build ^
     -DCMAKE_PCH_INSTANTIATE_TEMPLATES=ON ^
     -DCMAKE_UNITY_BUILD=ON ^
     -DCMAKE_UNITY_BUILD_BATCH_SIZE=10 ^
+    -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON ^
     -DWHISPER_OPENVINO=ON ^
     -DGGML_CUDA=ON ^
     -DGGML_OPENMP=ON ^
@@ -234,16 +258,15 @@ cmake -G "Ninja" -B build ^
     -DBUILD_SHARED_LIBS=ON ^
     -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" ^
     -DInferenceEngine_DIR="C:/Program Files (x86)/Intel/openvino_2024.6.0/runtime/cmake" ^
-    -DVCPKG_TARGET_TRIPLET=x64-windows ^
-    -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON ^
     -DWHISPER_MIMALLOC=ON ^
     -DWHISPER_LIBSNDFILE=ON ^
     -DWHISPER_SERVER_CPPRESTSDK=ON ^
-    -DUSE_MIMALLOC=ON ^
--DWHISPER_MIMALLOC=ON ^
--DWHISPER_BUILD_TESTS=ON ^
--DWHISPER_USE_CMOCKA=ON ^
--DWHISPER_SERVER_CPPRESTSDK=ON ^
+    -DWHISPER_BUILD_TESTS=ON ^
+    -DWHISPER_USE_CMOCKA=ON ^
+    -DWHISPER_TBB=ON ^
+    -DWHISPER_BOOST_STACKTRACE=ON ^
+    -DWHISPER_CUDA_API_WRAPPERS=ON ^
+    -DWHISPER_BUILD_EXAMPLES=ON
 
 REM Check for CMake errors
 if errorlevel 1 (
@@ -344,3 +367,12 @@ set "END_S=%~2:~6,2%"
 set /a "DURATION_S=(END_H-START_H)*3600 + (END_M-START_M)*60 + (END_S-START_S)"
 set "DURATION=%DURATION_S% seconds"
 goto :eof
+
+REM Run a simple test
+echo Running simple test...
+build\bin\main -h
+
+echo.
+echo All done!
+
+exit /b 0
