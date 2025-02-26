@@ -69,9 +69,31 @@ REM Ensure vcpkg is properly integrated
 echo Integrating vcpkg...
 "%VCPKG_ROOT%/vcpkg" integrate install
 
-REM Install dependencies using manifest mode (no package list)
-echo Installing vcpkg dependencies from manifest...
-"%VCPKG_ROOT%/vcpkg" install --triplet=x64-windows
+REM Check if required packages are already installed
+echo Checking vcpkg packages...
+
+REM Define a function to check if a package is installed
+setlocal EnableDelayedExpansion
+set "VCPKG_NEEDS_UPDATE=0"
+
+echo Verifying required packages...
+for %%p in (mimalloc tbb boost-stacktrace taskflow libsndfile sdl2 curl cpprestsdk) do (
+    "%VCPKG_ROOT%/vcpkg" list | findstr /C:"%%p:x64-windows" >nul 2>&1
+    if errorlevel 1 (
+        echo Package %%p needs to be installed
+        set "VCPKG_NEEDS_UPDATE=1"
+    ) else (
+        echo Package %%p is already installed
+    )
+)
+
+REM Install dependencies only if necessary
+if %VCPKG_NEEDS_UPDATE%==1 (
+    echo Installing missing vcpkg dependencies...
+    "%VCPKG_ROOT%/vcpkg" install --triplet=x64-windows
+) else (
+    echo All required packages are already installed
+)
 
 REM Add vcpkg packages to path
 set "PATH=%VCPKG_ROOT%/installed/x64-windows/bin;%PATH%"

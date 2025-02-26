@@ -127,26 +127,6 @@ set(GGML_SANITIZE_UNDEFINED ${WHISPER_SANITIZE_UNDEFINED})
 set(GGML_ALL_WARNINGS ${WHISPER_ALL_WARNINGS})
 set(GGML_FATAL_WARNINGS ${WHISPER_FATAL_WARNINGS})
 
-# transition helpers - FIXED FUNCTION
-function(whisper_option_depr TYPE OLD NEW)
-    if(DEFINED ${OLD}) # Fixed: removed duplicate ${} - this was already correct
-        message(${TYPE} "${OLD} is deprecated and will be removed in the future.\nUse ${NEW} instead\n")
-        set(${NEW} ON PARENT_SCOPE)
-    endif()
-endfunction()
-
-# Call the function from outside its definition
-whisper_option_depr(FATAL_ERROR WHISPER_CUBLAS GGML_CUDA)
-whisper_option_depr(WARNING WHISPER_CUDA GGML_CUDA)
-whisper_option_depr(WARNING WHISPER_KOMPUTE GGML_KOMPUTE)
-whisper_option_depr(WARNING WHISPER_METAL GGML_METAL)
-whisper_option_depr(WARNING WHISPER_METAL_EMBED_LIBRARY GGML_METAL_EMBED_LIBRARY)
-whisper_option_depr(WARNING WHISPER_NATIVE GGML_NATIVE)
-whisper_option_depr(WARNING WHISPER_OPENMP GGML_OPENMP)
-whisper_option_depr(WARNING WHISPER_RPC GGML_RPC)
-whisper_option_depr(WARNING WHISPER_SYCL GGML_SYCL)
-whisper_option_depr(WARNING WHISPER_SYCL_F16 GGML_SYCL_F16)
-
 #
 # build the library
 #
@@ -163,7 +143,7 @@ if(WHISPER_MIMALLOC)
     # Attempt to find mimalloc using multiple methods
 
     # Method 1: Find using traditional CONFIG mode
-    find_package(mimalloc CONFIG QUIET)
+    find_package(mimalloc CONFIG QUIET PATHS "${VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET}/share/mimalloc" NO_DEFAULT_PATH)
 
     if(NOT mimalloc_FOUND)
         # Method 2: Find using pkg-config
