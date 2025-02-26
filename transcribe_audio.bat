@@ -2,14 +2,39 @@
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (
-    echo Usage: transcribe_audio.bat input.m4a [model]
+    echo Usage: transcribe_audio.bat input.m4a [model] [--diarize]
     echo Models available: tiny.en, base.en, small.en, medium.en, large-v3
+    echo Add --diarize to enable speaker diarization
     exit /b 1
 )
 
 set "INPUT_FILE=%~1"
 set "MODEL=%~2"
+set "DIARIZE="
 if "%MODEL%"=="" set "MODEL=base.en"
+if "%~3"=="--diarize" set "DIARIZE=1"
+if "%~2"=="--diarize" (
+    set "DIARIZE=1"
+    set "MODEL=base.en"
+)
+
+REM If diarization requested, append -tdrz to model name
+if defined DIARIZE (
+    set "MODEL=%MODEL%-tdrz"
+)
+
+REM Check if WAV file already exists
+set "WAV_FILE=%~dpn1.wav"
+if not exist "%WAV_FILE%" (
+    echo Converting audio file...
+    call convert_audio.bat "%INPUT_FILE%"
+    if errorlevel 1 (
+        echo Error converting audio file
+        exit /b 1
+    )
+) else (
+    echo Using existing WAV file: %WAV_FILE%
+)
 
 REM Check if model exists, if not download it
 if not exist "models\ggml-%MODEL%.bin" (
@@ -22,14 +47,6 @@ if not exist "models\ggml-%MODEL%.bin" (
     )
 )
 
-echo Converting audio file...
-call convert_audio.bat "%INPUT_FILE%"
-if errorlevel 1 (
-    echo Error converting audio file
-    exit /b 1
-)
-
-set "WAV_FILE=%~dpn1.wav"
 set "OUTPUT_BASE=%~dpn1"
 
 echo Processing with whisper.cpp...
@@ -47,7 +64,8 @@ C:\codedev\whisper.cpp\build\bin\Release\whisper-cli.exe ^
     --max-len 2048 ^
     --best-of 5 ^
     --translate ^
-    --ov-e-device CPU
+    --ov-e-device GPU ^
+    %DIARIZE:1=--tinydiarize% ^
 
 if errorlevel 1 (
     echo Error: Transcription failed
