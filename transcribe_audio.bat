@@ -40,9 +40,15 @@ REM Check if model exists, if not download it
 if not exist "models\ggml-%MODEL%.bin" (
     echo Model file not found. Downloading %MODEL%...
     if not exist "models" mkdir models
-    call build\bin\Release\download-ggml-model.cmd %MODEL%
+
+    REM Download model using curl
+    set "MODEL_URL=https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-%MODEL%.bin"
+    echo Downloading from: !MODEL_URL!
+    curl -L "!MODEL_URL!" -o "models\ggml-%MODEL%.bin"
+
     if errorlevel 1 (
         echo Error downloading model
+        if exist "models\ggml-%MODEL%.bin" del "models\ggml-%MODEL%.bin"
         exit /b 1
     )
 )
