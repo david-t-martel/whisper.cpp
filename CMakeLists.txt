@@ -93,6 +93,11 @@ option(WHISPER_COREML "whisper: enable Core ML framework" OFF)
 option(WHISPER_COREML_ALLOW_FALLBACK "whisper: allow non-CoreML fallback" OFF)
 option(WHISPER_OPENVINO "whisper: support for OpenVINO" OFF)
 
+# Add new options after existing options
+option(WHISPER_MIMALLOC "whisper: use mimalloc allocator" ON)
+option(WHISPER_BOOST_STACKTRACE "whisper: use boost stacktrace for error reporting" ON)
+option(WHISPER_TASKFLOW "whisper: use taskflow for thread management" ON)
+
 # Required for relocatable CMake package
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/build-info.cmake)
 
@@ -133,6 +138,30 @@ if(NOT TARGET ggml)
 endif()
 
 add_subdirectory(src)
+
+# Add find_package commands
+if(WHISPER_MIMALLOC)
+    find_package(mimalloc CONFIG REQUIRED)
+    add_definitions(-DWHISPER_USE_MIMALLOC)
+endif()
+
+if(WHISPER_BOOST_STACKTRACE)
+    find_package(Boost REQUIRED COMPONENTS stacktrace_basic)
+    add_definitions(-DWHISPER_USE_BOOST_STACKTRACE)
+endif()
+
+if(WHISPER_TASKFLOW)
+    find_package(Taskflow CONFIG REQUIRED)
+    add_definitions(-DWHISPER_USE_TASKFLOW)
+endif()
+
+if(GGML_CUDA)
+    find_package(cuda-api-wrappers CONFIG)
+
+    if(cuda-api-wrappers_FOUND)
+        add_definitions(-DWHISPER_USE_CUDA_API_WRAPPERS)
+    endif()
+endif()
 
 #
 # install
@@ -188,4 +217,31 @@ endif()
 
 if(WHISPER_BUILD_EXAMPLES)
     add_subdirectory(examples)
+endif()
+
+# Modify whisper target to link with the libraries
+target_link_libraries(whisper
+    PRIVATE
+    ggml
+    ${CMAKE_DL_LIBS}
+    PUBLIC
+
+    # ... existing libraries
+)
+
+# Add conditionals for new libraries
+if(WHISPER_MIMALLOC)
+    target_link_libraries(whisper PUBLIC mimalloc)
+endif()
+
+if(WHISPER_BOOST_STACKTRACE)
+    target_link_libraries(whisper PUBLIC Boost::stacktrace_basic)
+endif()
+
+if(WHISPER_TASKFLOW)
+    target_link_libraries(whisper PUBLIC Taskflow::Taskflow)
+endif()
+
+if(GGML_CUDA AND cuda-api-wrappers_FOUND)
+    target_link_libraries(whisper PUBLIC cuda::api_wrappers)
 endif()
