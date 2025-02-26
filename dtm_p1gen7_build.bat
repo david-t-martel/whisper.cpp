@@ -37,6 +37,13 @@ if not exist "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin\nvcc.
     exit /b 1
 )
 
+REM Set CUDA environment variables
+set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
+set "CUDA_BIN_PATH=%CUDA_PATH%\bin"
+set "CUDA_LIB_PATH=%CUDA_PATH%\lib\x64"
+set "CUDA_INCLUDE_PATH=%CUDA_PATH%\include"
+set "PATH=%CUDA_BIN_PATH%;%PATH%"
+
 REM Set advanced CUDA optimization flags
 set "CUDA_CACHE_PATH=%LOCALAPPDATA%\CUDA\Cache"
 if not exist "%CUDA_CACHE_PATH%" mkdir "%CUDA_CACHE_PATH%"
@@ -46,6 +53,29 @@ set "CUDA_AUTO_BOOST=1"
 set "CUDA_MANAGED_FORCE_DEVICE_ALLOC=1"
 set "CUDA_DEVICE_ORDER=PCI_BUS_ID"
 set "CUDA_VISIBLE_DEVICES=0"
+
+REM Set CUDA compilation environment
+set "CUDA_ERROR_REPORTING=0"
+set "CUDA_FORCE_WAVE64=1"
+set "CUDA_LAUNCH_BLOCKING=0"
+set "CUDA_HOST_COMPILER=cl.exe"
+set "CUDA_PROPAGATE_HOST_FLAGS=off"
+
+REM Set CUDA compilation flags
+set "CUDAFLAGS=--disable-warnings --restrict"
+set "CUDAFE_FLAGS=--display_error_number"
+set "CUDAARCHS=89"
+
+REM filepath: /c:/codedev/whisper.cpp/dtm_p1gen7_build.bat
+REM Set CUDA specific flags
+set "CUDAFLAGS=-O3 --use_fast_math --restrict"
+set "CUDAFE_FLAGS=--display_error_number"
+set "CUDA_CACHE_DISABLE=0"
+set "CUDA_CACHE_MAXSIZE=4294967296"
+set "CUDA_CACHE_PATH=%LOCALAPPDATA%\NVIDIA\Cache"
+
+REM Add MSVC intrinsics path
+set "INCLUDE=%INCLUDE%;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include"
 
 REM Get CPU core count early
 for /f "tokens=*" %%i in ('wmic cpu get NumberOfLogicalProcessors ^| findstr [0-9]') do set "NUM_CORES=%%i"
@@ -73,7 +103,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f
 
 REM Clean build directory
-if exist build\ rmdir /s /q build
+rmdir /s /q build
+mkdir build
+rmdir /s /q "%LOCALAPPDATA%\CUDA\Cache"
+mkdir build
 
 REM Check for NVIDIA GPU and get info
 nvidia-smi >nul 2>&1
@@ -102,30 +135,110 @@ if not defined CUDA_ARCH (
 
 echo Using CUDA architecture: sm_%CUDA_ARCH%
 
-REM Configure with Ninja and CUDA
+REM Add before CMake command
+set "VERBOSE=1"
+set "CMAKE_VERBOSE_MAKEFILE=ON"
+
+REM Set ccache for CUDA if available
+where ccache >nul 2>&1
+if not errorlevel 1 (
+    set "CMAKE_CUDA_COMPILER_LAUNCHER=ccache"
+    set "CMAKE_CXX_COMPILER_LAUNCHER=ccache"
+    set "CMAKE_C_COMPILER_LAUNCHER=ccache"
+)
+
+REM Set CUDA specific flags for Release build
+set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
+set "CUDA_HOST_COMPILER=cl.exe"
+set "CUDAFLAGS=--use_fast_math -O3"
+set "CMAKE_CUDA_FLAGS_INIT=-O3"
+
+REM Set MSBuild-specific CUDA flags
+set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
+set "CUDA_HOST_COMPILER=cl.exe"
+set "CUDAFE_FLAGS=--display_error_number"
+set "CMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL"
+
+REM filepath: /c:/codedev/whisper.cpp/dtm_p1gen7_build.bat
+REM Set Ninja-specific environment variables
+set "CMAKE_MAKE_PROGRAM=ninja"
+set "CMAKE_BUILD_PARALLEL_LEVEL=%NUM_CORES%"
+
+REM Set CUDA compilation environment for Ninja
+set "CUDA_HOST_COMPILER=cl.exe"
+set "CUDA_NVCC_FLAGS=--use_fast_math;-O3"
+set "CUDA_PROPAGATE_HOST_FLAGS=off"
+set "CUDAARCHS=%CUDA_ARCH%"
+
+REM Add parallel CUDA compilation
+set "CUDA_NVCC_FLAGS=%CUDA_NVCC_FLAGS%;--threads=%NUM_CORES%"
+
+REM Add before CUDA build
+set "CUDA_FORCE_BLAS_KERNELS=1"
+set "CUDA_ALLOC_ALWAYS_MALLOC=1"
+set "GGML_CUDA_DMMV_X=32"
+set "GGML_CUDA_MMV_Y=1"
+
+REM Clean build directory
+rmdir /s /q build
+mkdir build
+rmdir /s /q "%LOCALAPPDATA%\CUDA\Cache"
+mkdir build
+
+REM Fine-tune CUDA architecture
+set "CUDA_ARCH_PTX=%CUDA_ARCH%"
+
+REM Set environment variables for build memory optimization
+set "CL=/MP /Zm500"
+set "CXXFLAGS=/Zm500"
+set "GGML_CUDA_FORCE_DMMV=1"
+set "GGML_CUDA_FORCE_MMQ=1"
+
+REM Configure with Ninja instead of MSBuild
 cmake -G "Ninja" -B build ^
     -DCMAKE_POLICY_DEFAULT_CMP0048=NEW ^
     -DCMAKE_POLICY_DEFAULT_CMP0074=NEW ^
+    -DCMAKE_POLICY_DEFAULT_CMP0104=NEW ^
+    -DCMAKE_MINIMUM_REQUIRED_VERSION="3.10" ^
     -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
-    -DCMAKE_C_COMPILER="cl.exe" ^
-    -DCMAKE_CXX_COMPILER="cl.exe" ^
-    -DCMAKE_CUDA_COMPILER="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin\nvcc.exe" ^
-    -DCMAKE_CUDA_ARCHITECTURES="%CUDA_ARCH%" ^
-    -DCMAKE_CUDA_FLAGS="-arch=sm_%CUDA_ARCH% -Wno-deprecated-gpu-targets -O3" ^
-    -DCMAKE_CUDA_FLAGS_RELEASE="-use_fast_math" ^
+    -DCMAKE_C_COMPILER=cl.exe ^
+    -DCMAKE_CXX_COMPILER=cl.exe ^
+    -DCMAKE_CUDA_COMPILER="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/bin/nvcc.exe" ^
+    -DCMAKE_CUDA_HOST_COMPILER=cl.exe ^
+    -DCMAKE_CUDA_ARCHITECTURES=%CUDA_ARCH% ^
+    -DCMAKE_CUDA_FLAGS="-arch=sm_%CUDA_ARCH% -gencode=arch=compute_%CUDA_ARCH_PTX%,code=compute_%CUDA_ARCH_PTX%" ^
+    -DCMAKE_CUDA_FLAGS_RELEASE="-O3" ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL ^
+    -DCMAKE_C_FLAGS_RELEASE="/MD /O2 /Ob2 /DNDEBUG" ^
+    -DCMAKE_CXX_FLAGS_RELEASE="/MD /O2 /Ob2 /DNDEBUG" ^
     -DWHISPER_OPENVINO=ON ^
     -DGGML_CUDA=ON ^
     -DGGML_OPENMP=ON ^
+    -DGGML_AVX2=ON ^
+    -DGGML_AVX=ON ^
+    -DGGML_F16C=ON ^
+    -DGGML_FMA=ON ^
     -DWHISPER_SDL2=ON ^
     -DWHISPER_CURL=ON ^
     -DBUILD_SHARED_LIBS=ON ^
-    -DCUDA_TOOLKIT_ROOT_DIR="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8" ^
-    -DInferenceEngine_DIR="C:\Program Files (x86)\Intel\openvino_2024.6.0\runtime\cmake" ^
-    -DCMAKE_BUILD_TYPE=Release ^
-    -DCMAKE_CXX_FLAGS="/O2 /GL /Qpar /favor:INTEL64 /arch:AVX2 /fp:fast /DNDEBUG" ^
-    -DCMAKE_C_FLAGS="/O2 /GL /Qpar /favor:INTEL64 /arch:AVX2 /fp:fast /DNDEBUG" ^
-    -DCMAKE_SHARED_LINKER_FLAGS="/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF" ^
-    -DCMAKE_EXE_LINKER_FLAGS="/LTCG"
+    -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" ^
+    -DInferenceEngine_DIR="C:/Program Files (x86)/Intel/openvino_2024.6.0/runtime/cmake" ^
+    -DCMAKE_CXX_FLAGS="/MP /Yu" ^
+    -DCMAKE_PCH_INSTANTIATE_TEMPLATES=ON ^
+    -DCMAKE_UNITY_BUILD=ON ^
+    -DCMAKE_UNITY_BUILD_BATCH_SIZE=10
+
+REM Enable Link Time Optimization for better runtime performance
+set "CMAKE_CXX_FLAGS_RELEASE=%CMAKE_CXX_FLAGS_RELEASE% /GL"
+set "CMAKE_C_FLAGS_RELEASE=%CMAKE_C_FLAGS_RELEASE% /GL"
+set "CMAKE_EXE_LINKER_FLAGS_RELEASE=/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF"
+set "CMAKE_SHARED_LINKER_FLAGS_RELEASE=/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF"
+
+REM Disable debug info in release builds for faster compilation
+set "CMAKE_CXX_FLAGS_RELEASE=%CMAKE_CXX_FLAGS_RELEASE% /Zi-"
+set "CMAKE_C_FLAGS_RELEASE=%CMAKE_C_FLAGS_RELEASE% /Zi-"
+set "CMAKE_CUDA_FLAGS_RELEASE=%CMAKE_CUDA_FLAGS_RELEASE% -lineinfo=0"
 
 REM Add after cmake command
 if errorlevel 1 (
@@ -138,8 +251,12 @@ ninja --version
 REM Add before build command
 set "START_TIME=%TIME%"
 
-REM Build main executable and all examples
-cmake --build build --config Release --target all -- -j%NUM_CORES%
+REM Build with Ninja
+cmake --build build --parallel %NUM_CORES% --target all
+
+REM Only rebuild what changed
+cmake --build build --parallel %NUM_CORES% --target all
+
 if errorlevel 1 (
     echo Build failed
     exit /b 1
@@ -176,6 +293,10 @@ if %DEPENDENCIES_OK%==0 (
     echo Error: Some dependencies failed to copy
     exit /b 1
 )
+
+REM Add environment variable for maximum compiler performance
+set "INCLUDE=%INCLUDE%;%VCToolsInstallDir%\include"
+set "__VSCMD_PREINIT_INCLUDE=%INCLUDE%"
 
 echo Build completed successfully
 exit /b 0
