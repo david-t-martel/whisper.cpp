@@ -1,7 +1,10 @@
+REM filepath: /C:/codedev/whisper.cpp/dtm_p1gen7_build.bat
 @echo off
 setlocal enabledelayedexpansion
 
-REM Add at the start of the script
+REM -----------------------------------------------------------
+REM 1. ENVIRONMENT VERIFICATION
+REM -----------------------------------------------------------
 if not defined VCPKG_ROOT (
     echo Error: VCPKG_ROOT environment variable not set
     exit /b 1
@@ -13,23 +16,11 @@ if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxilia
     exit /b 1
 )
 
-REM Setup environments with error checking
+REM Verify OpenVINO installation
 if not exist "C:/Program Files (x86)/Intel/openvino_2024.6.0/setupvars.bat" (
     echo Error: OpenVINO not found
     exit /b 1
 )
-call "C:/Program Files (x86)/Intel/openvino_2024.6.0/setupvars.bat"
-
-REM Verify required environment variables
-if not defined VCPKG_ROOT (
-    echo Error: VCPKG_ROOT not set
-    exit /b 1
-)
-set "PATH=%VCPKG_ROOT%;%PATH%"
-set "PATH=C:\codedev\msys64\mingw64\bin;%PATH%"
-
-REM Add Visual Studio environment
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 
 REM Verify CUDA installation
 if not exist "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin\nvcc.exe" (
@@ -37,55 +28,87 @@ if not exist "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin\nvcc.
     exit /b 1
 )
 
-REM Set CUDA environment variables
+REM Check for NVIDIA GPU
+nvidia-smi >nul 2>&1
+if errorlevel 1 (
+    echo Error: No NVIDIA GPU detected
+    exit /b 1
+)
+
+REM -----------------------------------------------------------
+REM 2. ENVIRONMENT SETUP
+REM -----------------------------------------------------------
+REM Setup OpenVINO environment
+call "C:/Program Files (x86)/Intel/openvino_2024.6.0/setupvars.bat"
+
+REM Setup Visual Studio environment
+call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+
+REM Path setup
+set "PATH=%VCPKG_ROOT%;%PATH%"
+set "PATH=C:\codedev\msys64\mingw64\bin;%PATH%"
+
+REM Get CPU core count
+for /f "tokens=*" %%i in ('wmic cpu get NumberOfLogicalProcessors ^| findstr [0-9]') do set "NUM_CORES=%%i"
+
+REM Get GPU info
+echo NVIDIA GPU Information:
+nvidia-smi --query-gpu=gpu_name,driver_version --format=csv,noheader
+
+REM -----------------------------------------------------------
+REM 3. CUDA CONFIGURATION
+REM -----------------------------------------------------------
+REM Set CUDA environment variables (consolidated)
 set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
 set "CUDA_BIN_PATH=%CUDA_PATH%\bin"
 set "CUDA_LIB_PATH=%CUDA_PATH%\lib\x64"
 set "CUDA_INCLUDE_PATH=%CUDA_PATH%\include"
 set "PATH=%CUDA_BIN_PATH%;%PATH%"
 
-REM Set advanced CUDA optimization flags
+REM Set CUDA architecture
+for /f "tokens=*" %%i in ('nvidia-smi --query-gpu=gpu_name --format=csv,noheader') do (
+    set "GPU_NAME=%%i"
+    if "!GPU_NAME!"=="NVIDIA RTX 2000 Ada Generation Laptop GPU" set "CUDA_ARCH=89"
+)
+
+REM Verify CUDA architecture was set
+if not defined CUDA_ARCH (
+    echo Warning: Unknown GPU architecture, using default for Ada Lovelace
+    set "CUDA_ARCH=89"
+)
+set "CUDA_ARCH_PTX=%CUDA_ARCH%"
+set "CUDAARCHS=%CUDA_ARCH%"
+
+echo Using CUDA architecture: sm_%CUDA_ARCH%
+
+REM Set unified CUDA compilation flags
+set "CUDA_HOST_COMPILER=cl.exe"
+set "CUDA_PROPAGATE_HOST_FLAGS=off"
+set "CUDA_NVCC_FLAGS=--use_fast_math;-O3;--threads=%NUM_CORES%;--disable-warnings"
+set "CUDAFE_FLAGS=--display_error_number"
+
+REM CUDA optimization settings
 set "CUDA_CACHE_PATH=%LOCALAPPDATA%\CUDA\Cache"
 if not exist "%CUDA_CACHE_PATH%" mkdir "%CUDA_CACHE_PATH%"
-set "CUDA_CACHE_MAXSIZE=8192"
+set "CUDA_CACHE_MAXSIZE=4294967296"
 set "CUDA_FORCE_PTX_JIT=1"
 set "CUDA_AUTO_BOOST=1"
 set "CUDA_MANAGED_FORCE_DEVICE_ALLOC=1"
 set "CUDA_DEVICE_ORDER=PCI_BUS_ID"
 set "CUDA_VISIBLE_DEVICES=0"
-
-REM Set CUDA compilation environment
 set "CUDA_ERROR_REPORTING=0"
-set "CUDA_FORCE_WAVE64=1"
-set "CUDA_LAUNCH_BLOCKING=0"
-set "CUDA_HOST_COMPILER=cl.exe"
-set "CUDA_PROPAGATE_HOST_FLAGS=off"
 
-REM Set CUDA compilation flags
-set "CUDAFLAGS=--disable-warnings --restrict"
-set "CUDAFE_FLAGS=--display_error_number"
-set "CUDAARCHS=89"
+REM Set GGML CUDA optimizations
+set "GGML_CUDA_FORCE_DMMV=1"
+set "GGML_CUDA_FORCE_MMQ=1"
+set "GGML_CUDA_DMMV_X=32"
+set "GGML_CUDA_MMV_Y=1"
+set "CUDA_FORCE_BLAS_KERNELS=1"
+set "CUDA_ALLOC_ALWAYS_MALLOC=1"
 
-REM filepath: /c:/codedev/whisper.cpp/dtm_p1gen7_build.bat
-REM Set CUDA specific flags
-set "CUDAFLAGS=-O3 --use_fast_math --restrict"
-set "CUDAFE_FLAGS=--display_error_number"
-set "CUDA_CACHE_DISABLE=0"
-set "CUDA_CACHE_MAXSIZE=4294967296"
-set "CUDA_CACHE_PATH=%LOCALAPPDATA%\NVIDIA\Cache"
-
-REM Add MSVC intrinsics path
-set "INCLUDE=%INCLUDE%;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include"
-
-REM Get CPU core count early
-for /f "tokens=*" %%i in ('wmic cpu get NumberOfLogicalProcessors ^| findstr [0-9]') do set "NUM_CORES=%%i"
-
-REM Set OpenVINO performance hints
-set "OPENVINO_ENABLE_PERFORMANCE_HINT=1"
-set "OPENVINO_NUM_THREADS=%NUM_CORES%"
-set "OPENVINO_CACHE_DIR=%LOCALAPPDATA%\OpenVINO\Cache"
-if not exist "%OPENVINO_CACHE_DIR%" mkdir "%OPENVINO_CACHE_DIR%"
-
+REM -----------------------------------------------------------
+REM 4. SYSTEM OPTIMIZATION
+REM -----------------------------------------------------------
 REM Set system performance settings
 powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 set "ProcessorPerformance=100"
@@ -102,44 +125,41 @@ REM Optimize memory performance
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "LargeSystemCache" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f
 
-REM Clean build directory
-rmdir /s /q build
-mkdir build
-rmdir /s /q "%LOCALAPPDATA%\CUDA\Cache"
-mkdir build
+REM -----------------------------------------------------------
+REM 5. BUILD PREPARATION
+REM -----------------------------------------------------------
+REM Set OpenVINO performance hints
+set "OPENVINO_ENABLE_PERFORMANCE_HINT=1"
+set "OPENVINO_NUM_THREADS=%NUM_CORES%"
+set "OPENVINO_CACHE_DIR=%LOCALAPPDATA%\OpenVINO\Cache"
+if not exist "%OPENVINO_CACHE_DIR%" mkdir "%OPENVINO_CACHE_DIR%"
 
-REM Check for NVIDIA GPU and get info
-nvidia-smi >nul 2>&1
-if errorlevel 1 (
-    echo Error: No NVIDIA GPU detected
-    exit /b 1
-)
+REM Add MSVC intrinsics path
+set "INCLUDE=%INCLUDE%;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include"
+set "INCLUDE=%INCLUDE%;%VCToolsInstallDir%\include"
+set "__VSCMD_PREINIT_INCLUDE=%INCLUDE%"
 
-REM Get GPU info
-echo NVIDIA GPU Information:
-nvidia-smi --query-gpu=gpu_name,driver_version --format=csv,noheader
+REM Set C/C++ build flags
+set "CL=/MP /Zm500 /Y-"
+set "CXXFLAGS=/Zm500"
+set "CMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL"
 
-REM Set CUDA architecture for RTX 2000 Ada Generation
-for /f "tokens=*" %%i in ('nvidia-smi --query-gpu=gpu_name --format=csv,noheader') do (
-    set "GPU_NAME=%%i"
+REM Set Link Time Optimization flags
+set "CMAKE_CXX_FLAGS_RELEASE=/MD /O2 /Ob2 /GL /DNDEBUG"
+set "CMAKE_C_FLAGS_RELEASE=/MD /O2 /Ob2 /GL /DNDEBUG"
+set "CMAKE_EXE_LINKER_FLAGS_RELEASE=/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF"
+set "CMAKE_SHARED_LINKER_FLAGS_RELEASE=/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF"
 
-    REM Ada Lovelace Mobile GPUs (40-series)
-    if "!GPU_NAME!"=="NVIDIA RTX 2000 Ada Generation Laptop GPU" set "CUDA_ARCH=89"
-)
+REM Link optimization flags should be set before CMAKE command
+set "CMAKE_CXX_FLAGS_RELEASE=%CMAKE_CXX_FLAGS_RELEASE% /GL"
 
-REM Verify CUDA architecture was set
-if not defined CUDA_ARCH (
-    echo Warning: Unknown GPU architecture, using default for Ada Lovelace
-    set "CUDA_ARCH=89"
-)
-
-echo Using CUDA architecture: sm_%CUDA_ARCH%
-
-REM Add before CMake command
+REM Set build environment
 set "VERBOSE=1"
 set "CMAKE_VERBOSE_MAKEFILE=ON"
+set "CMAKE_MAKE_PROGRAM=ninja"
+set "CMAKE_BUILD_PARALLEL_LEVEL=%NUM_CORES%"
 
-REM Set ccache for CUDA if available
+REM Set ccache if available
 where ccache >nul 2>&1
 if not errorlevel 1 (
     set "CMAKE_CUDA_COMPILER_LAUNCHER=ccache"
@@ -147,54 +167,30 @@ if not errorlevel 1 (
     set "CMAKE_C_COMPILER_LAUNCHER=ccache"
 )
 
-REM Set CUDA specific flags for Release build
-set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
-set "CUDA_HOST_COMPILER=cl.exe"
-set "CUDAFLAGS=--use_fast_math -O3"
-set "CMAKE_CUDA_FLAGS_INIT=-O3"
-
-REM Set MSBuild-specific CUDA flags
-set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8"
-set "CUDA_HOST_COMPILER=cl.exe"
-set "CUDAFE_FLAGS=--display_error_number"
-set "CMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL"
-
-REM filepath: /c:/codedev/whisper.cpp/dtm_p1gen7_build.bat
-REM Set Ninja-specific environment variables
-set "CMAKE_MAKE_PROGRAM=ninja"
-set "CMAKE_BUILD_PARALLEL_LEVEL=%NUM_CORES%"
-
-REM Set CUDA compilation environment for Ninja
-set "CUDA_HOST_COMPILER=cl.exe"
-set "CUDA_NVCC_FLAGS=--use_fast_math;-O3"
-set "CUDA_PROPAGATE_HOST_FLAGS=off"
-set "CUDAARCHS=%CUDA_ARCH%"
-
-REM Add parallel CUDA compilation
-set "CUDA_NVCC_FLAGS=%CUDA_NVCC_FLAGS%;--threads=%NUM_CORES%"
-
-REM Add before CUDA build
-set "CUDA_FORCE_BLAS_KERNELS=1"
-set "CUDA_ALLOC_ALWAYS_MALLOC=1"
-set "GGML_CUDA_DMMV_X=32"
-set "GGML_CUDA_MMV_Y=1"
-
-REM Clean build directory
+REM Clean build directory (done once)
 rmdir /s /q build
 mkdir build
-rmdir /s /q "%LOCALAPPDATA%\CUDA\Cache"
-mkdir build
 
-REM Fine-tune CUDA architecture
-set "CUDA_ARCH_PTX=%CUDA_ARCH%"
+REM Install required vcpkg packages
+echo Installing vcpkg dependencies...
+"%VCPKG_ROOT%\vcpkg" install ^
+   cuda-api-wrappers:x64-windows ^
+   mimalloc:x64-windows ^
+   tbb:x64-windows ^
+   libsndfile:x64-windows ^
+   cpprestsdk:x64-windows ^
+   --triplet=x64-windows
 
-REM Set environment variables for build memory optimization
-set "CL=/MP /Zm500"
-set "CXXFLAGS=/Zm500"
-set "GGML_CUDA_FORCE_DMMV=1"
-set "GGML_CUDA_FORCE_MMQ=1"
+REM Add vcpkg packages to path
+set "PATH=%VCPKG_ROOT%\installed\x64-windows\bin;%PATH%"
 
-REM Configure with Ninja instead of MSBuild
+REM -----------------------------------------------------------
+REM 6. CMAKE CONFIGURATION
+REM -----------------------------------------------------------
+REM Start timing
+set "START_TIME=%TIME%"
+
+REM Configure with Ninja
 cmake -G "Ninja" -B build ^
     -DCMAKE_POLICY_DEFAULT_CMP0048=NEW ^
     -DCMAKE_POLICY_DEFAULT_CMP0074=NEW ^
@@ -206,12 +202,18 @@ cmake -G "Ninja" -B build ^
     -DCMAKE_CUDA_COMPILER="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/bin/nvcc.exe" ^
     -DCMAKE_CUDA_HOST_COMPILER=cl.exe ^
     -DCMAKE_CUDA_ARCHITECTURES=%CUDA_ARCH% ^
-    -DCMAKE_CUDA_FLAGS="-arch=sm_%CUDA_ARCH% -gencode=arch=compute_%CUDA_ARCH_PTX%,code=compute_%CUDA_ARCH_PTX%" ^
+    -DCMAKE_CUDA_FLAGS="-arch=sm_%CUDA_ARCH%" ^
     -DCMAKE_CUDA_FLAGS_RELEASE="-O3" ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL ^
-    -DCMAKE_C_FLAGS_RELEASE="/MD /O2 /Ob2 /DNDEBUG" ^
-    -DCMAKE_CXX_FLAGS_RELEASE="/MD /O2 /Ob2 /DNDEBUG" ^
+    -DCMAKE_C_FLAGS_RELEASE="%CMAKE_C_FLAGS_RELEASE% /Zi-" ^
+    -DCMAKE_CXX_FLAGS_RELEASE="%CMAKE_CXX_FLAGS_RELEASE% /Zi-" ^
+    -DCMAKE_CXX_FLAGS="/MP" ^
+    -DCMAKE_SHARED_LINKER_FLAGS="%CMAKE_SHARED_LINKER_FLAGS_RELEASE%" ^
+    -DCMAKE_EXE_LINKER_FLAGS="%CMAKE_EXE_LINKER_FLAGS_RELEASE%" ^
+    -DCMAKE_PCH_INSTANTIATE_TEMPLATES=ON ^
+    -DCMAKE_UNITY_BUILD=ON ^
+    -DCMAKE_UNITY_BUILD_BATCH_SIZE=10 ^
     -DWHISPER_OPENVINO=ON ^
     -DGGML_CUDA=ON ^
     -DGGML_OPENMP=ON ^
@@ -224,57 +226,48 @@ cmake -G "Ninja" -B build ^
     -DBUILD_SHARED_LIBS=ON ^
     -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" ^
     -DInferenceEngine_DIR="C:/Program Files (x86)/Intel/openvino_2024.6.0/runtime/cmake" ^
-    -DCMAKE_CXX_FLAGS="/MP /Yu" ^
-    -DCMAKE_PCH_INSTANTIATE_TEMPLATES=ON ^
-    -DCMAKE_UNITY_BUILD=ON ^
-    -DCMAKE_UNITY_BUILD_BATCH_SIZE=10
+    -DVCPKG_TARGET_TRIPLET=x64-windows ^
+    -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON ^
+    -DWHISPER_MIMALLOC=ON ^
+    -DWHISPER_LIBSNDFILE=ON ^
+    -DWHISPER_SERVER_CPPRESTSDK=ON
 
-REM Enable Link Time Optimization for better runtime performance
-set "CMAKE_CXX_FLAGS_RELEASE=%CMAKE_CXX_FLAGS_RELEASE% /GL"
-set "CMAKE_C_FLAGS_RELEASE=%CMAKE_C_FLAGS_RELEASE% /GL"
-set "CMAKE_EXE_LINKER_FLAGS_RELEASE=/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF"
-set "CMAKE_SHARED_LINKER_FLAGS_RELEASE=/LTCG /INCREMENTAL:NO /OPT:REF /OPT:ICF"
-
-REM Disable debug info in release builds for faster compilation
-set "CMAKE_CXX_FLAGS_RELEASE=%CMAKE_CXX_FLAGS_RELEASE% /Zi-"
-set "CMAKE_C_FLAGS_RELEASE=%CMAKE_C_FLAGS_RELEASE% /Zi-"
-set "CMAKE_CUDA_FLAGS_RELEASE=%CMAKE_CUDA_FLAGS_RELEASE% -lineinfo=0"
-
-REM Add after cmake command
+REM Check for CMake errors
 if errorlevel 1 (
     echo CMake configuration failed
     exit /b 1
 )
+
+REM Display Ninja version
 echo Build system: Ninja
 ninja --version
 
-REM Add before build command
-set "START_TIME=%TIME%"
+REM -----------------------------------------------------------
+REM 7. BUILD EXECUTION
+REM -----------------------------------------------------------
 
 REM Build with Ninja
-cmake --build build --parallel %NUM_CORES% --target all
-
-REM Only rebuild what changed
-cmake --build build --parallel %NUM_CORES% --target all
+cmake --build build --parallel %NUM_CORES%
 
 if errorlevel 1 (
     echo Build failed
     exit /b 1
 )
 
-REM Add after build completion
+REM Calculate build time
 set "END_TIME=%TIME%"
 call :calculate_duration "%START_TIME%" "%END_TIME%"
 echo Build duration: %DURATION%
 
-REM Create output directory
+REM -----------------------------------------------------------
+REM 8. ARTIFACTS ORGANIZATION
+REM -----------------------------------------------------------
+REM Create output directories
 if not exist "build\bin\Release" mkdir "build\bin\Release"
-
-REM Create output directories for examples
 if not exist "build\bin\Release\examples" mkdir "build\bin\Release\examples"
 if not exist "build\bin\Release\samples" mkdir "build\bin\Release\samples"
 
-REM Copy dependencies with verification
+REM Copy dependencies
 echo Copying dependencies...
 set "DEPENDENCIES_OK=1"
 
@@ -283,8 +276,9 @@ call :copy_dlls "%INTEL_OPENVINO_DIR%\runtime\3rdparty\tbb\bin\*.dll" "build\bin
 call :copy_dlls "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.38.33130\x64\Microsoft.VC143.CRT\*.dll" "build\bin\Release" "MSVC"
 call :copy_dlls "%INTEL_OPENVINO_DIR%\runtime\3rdparty\*.dll" "build\bin\Release" "Other"
 
-REM Copy examples to output directory
+REM Copy executables
 echo Copying example executables...
+xcopy /y "build\bin\*.exe" "build\bin\Release\"
 xcopy /y "build\bin\Release\whisper-*.*" "build\bin\Release\examples\"
 xcopy /y "build\examples\*.exe" "build\bin\Release\examples\"
 xcopy /y "build\samples\*.exe" "build\bin\Release\samples\"
@@ -294,13 +288,12 @@ if %DEPENDENCIES_OK%==0 (
     exit /b 1
 )
 
-REM Add environment variable for maximum compiler performance
-set "INCLUDE=%INCLUDE%;%VCToolsInstallDir%\include"
-set "__VSCMD_PREINIT_INCLUDE=%INCLUDE%"
-
 echo Build completed successfully
 exit /b 0
 
+REM -----------------------------------------------------------
+REM 9. HELPER FUNCTIONS
+REM -----------------------------------------------------------
 :copy_dlls
 xcopy /y %~1 %~2
 if errorlevel 1 (
@@ -312,19 +305,12 @@ goto :eof
 :verify_performance
 echo Verifying system capabilities...
 set "PERF_OK=1"
-
-REM Check CPU features
 wmic cpu get Name, MaxClockSpeed, NumberOfCores, NumberOfLogicalProcessors
 if errorlevel 1 set "PERF_OK=0"
-
-REM Check CUDA capability
 nvcc --version > nul 2>&1
 if errorlevel 1 set "PERF_OK=0"
-
-REM Check available memory
 wmic ComputerSystem get TotalPhysicalMemory
 if errorlevel 1 set "PERF_OK=0"
-
 if %PERF_OK%==0 (
     echo Warning: Performance verification failed
     echo Some optimizations may not be available
