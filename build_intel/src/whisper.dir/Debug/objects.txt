@@ -1,0 +1,1 @@
+T:/projects/whisper.cpp/build/src/whisper.dir/Debug/whisper.obj

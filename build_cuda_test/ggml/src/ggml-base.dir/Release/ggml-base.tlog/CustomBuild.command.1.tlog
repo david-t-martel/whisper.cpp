@@ -1,0 +1,10 @@
+^T:\PROJECTS\WHISPER.CPP\GGML\SRC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -ST:/projects/whisper.cpp -BT:/projects/whisper.cpp/build_cuda_test --check-stamp-file T:/projects/whisper.cpp/build_cuda_test/ggml/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

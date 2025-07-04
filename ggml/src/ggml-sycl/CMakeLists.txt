@@ -6,6 +6,12 @@ check_cxx_compiler_flag("-fsycl" SUPPORTS_SYCL)
 
 if (DEFINED ENV{ONEAPI_ROOT})
     message(STATUS "Using oneAPI Release SYCL compiler (icpx).")
+    # Force Intel DPC++ compiler for SYCL compilation
+    find_program(INTEL_DPCPP_COMPILER icpx HINTS ENV{ONEAPI_ROOT}/compiler/latest/bin)
+    if(INTEL_DPCPP_COMPILER)
+        set(CMAKE_CXX_COMPILER ${INTEL_DPCPP_COMPILER})
+        message(STATUS "Set SYCL compiler to: ${INTEL_DPCPP_COMPILER}")
+    endif()
 elseif(SUPPORTS_SYCL)
     message(WARNING "Using open-source SYCL compiler (clang++). Didn't detect ENV {ONEAPI_ROOT}.
         If you expected the oneAPI Release compiler, please install oneAPI & source it, like:
@@ -13,6 +19,10 @@ elseif(SUPPORTS_SYCL)
 else()
     message(FATAL_ERROR, "C++ compiler lacks SYCL support.")
 endif()
+
+# Ensure C++17 standard for SYCL
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message(STATUS "SYCL found")
 #todo: AOT
 
@@ -28,7 +38,8 @@ if (GGML_SYCL_F16)
     add_compile_definitions(GGML_SYCL_F16)
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-narrowing -fsycl")
+# Set compiler flags for SYCL
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsycl")
 
 if (GGML_SYCL_TARGET STREQUAL "NVIDIA")
     add_compile_definitions(GGML_SYCL_WARP_SIZE=32)
@@ -60,9 +71,33 @@ if (${DNNL_FOUND} AND GGML_SYCL_TARGET STREQUAL "INTEL")
 endif()
 
 if (WIN32)
-    find_package(IntelSYCL REQUIRED)
+    # Work around Intel SYCL CMake package bug - use direct linking
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsycl")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsycl")
+
+    # Find Intel SYCL paths manually
+    find_path(INTEL_SYCL_INCLUDE_DIR NAMES sycl/sycl.hpp
+        PATHS "${ONEAPI_ROOT}/compiler/latest/include"
+              "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/include"
+        NO_DEFAULT_PATH
+    )
+
+    find_library(INTEL_SYCL_LIBRARY NAMES sycl
+        PATHS "${ONEAPI_ROOT}/compiler/latest/lib"
+              "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/lib"
+        NO_DEFAULT_PATH
+    )
+
+    if(INTEL_SYCL_INCLUDE_DIR AND INTEL_SYCL_LIBRARY)
+        target_include_directories(ggml-sycl PRIVATE ${INTEL_SYCL_INCLUDE_DIR})
+        target_link_libraries(ggml-sycl PRIVATE ${INTEL_SYCL_LIBRARY})
+        message(STATUS "Using Intel SYCL: ${INTEL_SYCL_LIBRARY}")
+    else()
+        message(FATAL_ERROR "Intel SYCL not found")
+    endif()
+
     find_package(MKL REQUIRED)
-    target_link_libraries(ggml-sycl PRIVATE IntelSYCL::SYCL_CXX MKL::MKL MKL::MKL_SYCL)
+    target_link_libraries(ggml-sycl PRIVATE MKL::MKL MKL::MKL_SYCL)
 else()
     if (GGML_SYCL_TARGET STREQUAL "INTEL")
         target_link_libraries(ggml-sycl PRIVATE sycl OpenCL mkl_core pthread m dl mkl_sycl_blas mkl_intel_ilp64 mkl_tbb_thread)

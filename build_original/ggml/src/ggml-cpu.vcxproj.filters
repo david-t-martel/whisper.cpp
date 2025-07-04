@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-aarch64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-hbm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-quants.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-traits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\amx\amx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\amx\mmq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-aarch64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-hbm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-quants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\amx\amx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\amx\mmq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-impl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="T:\projects\whisper.cpp\ggml\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{21B4C4B9-088D-3320-808F-F6B1F3565AFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{09F88DD9-77BA-3E5D-A307-C755CE109046}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

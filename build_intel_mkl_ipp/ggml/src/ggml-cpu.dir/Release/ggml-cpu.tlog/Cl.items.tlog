@@ -1,0 +1,8 @@
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu.c;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\ggml-cpu\ggml-cpu.c.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu.cpp;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\ggml-cpu\ggml-cpu.cpp.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-aarch64.cpp;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\ggml-cpu-aarch64.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-hbm.cpp;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\ggml-cpu-hbm.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-quants.c;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\ggml-cpu-quants.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\ggml-cpu-traits.cpp;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\ggml-cpu-traits.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\amx\amx.cpp;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\amx.obj
+T:\projects\whisper.cpp\ggml\src\ggml-cpu\amx\mmq.cpp;T:\projects\whisper.cpp\build_intel_mkl_ipp\ggml\src\ggml-cpu.dir\Release\mmq.obj

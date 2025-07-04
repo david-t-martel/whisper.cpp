@@ -1,0 +1,7 @@
+Package: boost-config
+Version: 1.86.0
+Depends: boost-cmake, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 92a5fc8580fc791a9eda637ae051c9e05a3136935fa3efc83eef861cb98398c4
+Description: Boost config module

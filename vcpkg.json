@@ -4,6 +4,7 @@
   "version": "1.7.4",
   "description": "High-performance inference of OpenAI's Whisper automatic speech recognition (ASR) model",
   "homepage": "https://github.com/ggerganov/whisper.cpp",
+  "builtin-baseline": "d5ec528843d29e3a52d745a64b469f810b2cedbf",
   "dependencies": [
     {
       "name": "vcpkg-cmake",

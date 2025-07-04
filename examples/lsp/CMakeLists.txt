@@ -3,7 +3,7 @@ if (WHISPER_SDL2)
     set(TARGET lsp)
     add_executable(${TARGET} lsp.cpp)
 
-    include(DefaultTargetOptions)
+    include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
 
     target_link_libraries(${TARGET} PRIVATE common json_cpp common-sdl whisper ${CMAKE_THREAD_LIBS_INIT})
 endif ()

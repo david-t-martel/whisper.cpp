@@ -1,0 +1,26 @@
+-- Using cached yasm-yasm-009450c7ad4d425fa5a10ac4bd6efbd25248d823.tar.gz
+-- Cleaning sources at T:/projects/whisper.cpp/vcpkg_installed/x64-windows/vcpkg/blds/yasm/src/d25248d823-142afd564c.clean. Use --editable to skip cleaning for the packages you specify.
+-- Extracting source C:/Users/david/AppData/Local/vcpkg/downloads/yasm-yasm-009450c7ad4d425fa5a10ac4bd6efbd25248d823.tar.gz
+-- Applying patch add-feature-tools.patch
+-- Applying patch fix-arm-cross-build.patch
+-- Applying patch fix-overlay-pdb.patch
+-- Using source at T:/projects/whisper.cpp/vcpkg_installed/x64-windows/vcpkg/blds/yasm/src/d25248d823-142afd564c.clean
+-- Found external ninja('1.12.1').
+-- Configuring x64-windows
+CMake Error at scripts/cmake/vcpkg_execute_required_process.cmake:127 (message):
+    Command failed: "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v
+    Working Directory: T:/projects/whisper.cpp/vcpkg_installed/x64-windows/vcpkg/blds/yasm/x64-windows-rel/vcpkg-parallel-configure
+    Error code: 1
+    See logs for more information:
+      T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-dbg-CMakeCache.txt.log
+      T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-rel-CMakeCache.txt.log
+      T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-dbg-CMakeConfigureLog.yaml.log
+      T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-rel-CMakeConfigureLog.yaml.log
+      T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-out.log
+
+Call Stack (most recent call first):
+  T:/projects/whisper.cpp/vcpkg_installed/x64-windows/x64-windows/share/vcpkg-cmake/vcpkg_cmake_configure.cmake:269 (vcpkg_execute_required_process)
+  C:/Users/david/AppData/Local/vcpkg/registries/git-trees/cd30518fa90953d3fa7cc1c0096bf628d2b457be/portfile.cmake:32 (vcpkg_cmake_configure)
+  scripts/ports.cmake:203 (include)
+
+

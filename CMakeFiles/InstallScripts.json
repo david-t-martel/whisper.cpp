@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"T:/projects/whisper.cpp/cmake_install.cmake",
+		"T:/projects/whisper.cpp/ggml/cmake_install.cmake",
+		"T:/projects/whisper.cpp/ggml/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/ggml/src/ggml-cpu/cmake_install.cmake",
+		"T:/projects/whisper.cpp/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

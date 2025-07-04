@@ -1,17 +1,453 @@
 {
-	"version": 8,
-	"configurePresets": [
-		{
-			"name": "Configure preset using toolchain file",
-			"displayName": "Configure preset using toolchain file",
-			"description": "Sets Ninja generator, build and install directory",
-			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/out/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "Debug",
-				"CMAKE_TOOLCHAIN_FILE": "",
-				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
-			}
-		}
-	]
+  "version": 8,
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default configuration",
+      "description": "Default build using system compiler",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      }
+    },
+    {
+      "name": "vs2022-x64",
+      "displayName": "Visual Studio 2022 x64",
+      "description": "Configure for Visual Studio 2022 x64 with Intel oneAPI TBB",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "TBB_ROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest",
+        "TBB_DIR": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest/lib/cmake/tbb",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI"
+      }
+    },
+    {
+      "name": "vs2022-x64-debug",
+      "displayName": "Visual Studio 2022 x64 Debug",
+      "description": "Debug build with Intel oneAPI TBB",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "TBB_ROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest",
+        "TBB_DIR": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest/lib/cmake/tbb",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI"
+      }
+    },
+    {
+      "name": "ninja-release-tbb",
+      "displayName": "Ninja Release with TBB",
+      "description": "Fast Ninja build with Intel TBB support",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "TBB_ROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest",
+        "TBB_DIR": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest/lib/cmake/tbb",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      }
+    },
+    {
+      "name": "vs2022-intel-mkl-ipp",
+      "displayName": "Visual Studio 2022 x64 with Intel MKL + IPP",
+      "description": "Release build with Intel MKL FFT and IPP optimizations",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "TBB_ROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest",
+        "MKL_ROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPP_ROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest"
+      }
+    },
+    {
+      "name": "ninja-intel-optimized",
+      "displayName": "Ninja Build with Full Intel Optimizations",
+      "description": "Fast build with TBB, MKL, and IPP optimizations",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest"
+      }
+    },
+    {
+      "name": "ninja-intel-core-only",
+      "displayName": "Ninja Build - Intel Core Library Only",
+      "description": "Build only core whisper library with Intel optimizations (avoids API compatibility issues)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest"
+      }
+    },
+    {
+      "name": "vs2022-cuda",
+      "displayName": "Visual Studio 2022 x64 with CUDA",
+      "description": "CUDA-accelerated build with Visual Studio 2022",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_CUDA": "ON",
+        "WHISPER_CUDA_API_WRAPPERS": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      }
+    },
+    {
+      "name": "ninja-cuda",
+      "displayName": "Ninja Build with CUDA",
+      "description": "Fast CUDA-accelerated build using Ninja",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_CUDA": "ON",
+        "WHISPER_CUDA_API_WRAPPERS": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      }
+    },
+    {
+      "name": "vs2022-intel-cuda",
+      "displayName": "Visual Studio 2022 Intel + CUDA",
+      "description": "Combined Intel CPU optimizations with CUDA GPU acceleration",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "WHISPER_CUDA": "ON",
+        "WHISPER_CUDA_API_WRAPPERS": "ON",
+        "TBB_ROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest",
+        "MKL_ROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPP_ROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest"
+      }
+    },
+    {
+      "name": "ninja-intel-cuda",
+      "displayName": "Ninja Intel + CUDA",
+      "description": "Fast build with Intel CPU optimizations and CUDA GPU acceleration",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "WHISPER_CUDA": "ON",
+        "WHISPER_CUDA_API_WRAPPERS": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest"
+      }
+    },
+    {
+      "name": "vs2022-sycl",
+      "displayName": "Visual Studio 2022 x64 with Intel SYCL",
+      "description": "Configure for Visual Studio 2022 x64 with Intel SYCL GPU acceleration",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin/icpx.exe",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "WHISPER_SYCL": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest",
+        "TBBROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest"
+      }
+    },
+    {
+      "name": "ninja-sycl",
+      "displayName": "Ninja Build with Intel SYCL",
+      "description": "Fast build with Intel SYCL GPU acceleration and oneAPI optimizations",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin/icpx.exe",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "WHISPER_SYCL": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest",
+        "TBBROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest"
+      }
+    },
+    {
+      "name": "ninja-intel-sycl",
+      "displayName": "Ninja Intel Full Stack + SYCL",
+      "description": "Comprehensive Intel oneAPI build with SYCL GPU acceleration",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MKL": "ON",
+        "WHISPER_MKL_FFT": "ON",
+        "WHISPER_MKL_BLAS": "ON",
+        "WHISPER_MKL_VML": "ON",
+        "WHISPER_IPP": "ON",
+        "WHISPER_IPP_AUDIO": "ON",
+        "WHISPER_SYCL": "ON",
+        "WHISPER_MIMALLOC": "ON",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "CMAKE_CUDA_ARCHITECTURES": "89",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      "environment": {
+        "ONEAPI_ROOT": "C:/Program Files (x86)/Intel/oneAPI",
+        "MKLROOT": "C:/Program Files (x86)/Intel/oneAPI/mkl/latest",
+        "IPPROOT": "C:/Program Files (x86)/Intel/oneAPI/ipp/latest",
+        "TBBROOT": "C:/Program Files (x86)/Intel/oneAPI/tbb/latest"
+      }
+    },
+    {
+      "name": "ninja-vcpkg-full",
+      "displayName": "Ninja with Full vcpkg Dependencies",
+      "description": "Build with all vcpkg packages enabled (libsndfile, SDL2, curl, etc.)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "toolchainFile": "C:/codedev/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_LIBSNDFILE": "ON",
+        "WHISPER_SDL2": "ON",
+        "WHISPER_CURL": "ON",
+        "WHISPER_CPPRESTSDK": "ON",
+        "WHISPER_TBB": "ON",
+        "WHISPER_MIMALLOC": "OFF",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "WHISPER_BUILD_EXAMPLES": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      }
+    },
+    {
+      "name": "ninja-vcpkg-clean",
+      "displayName": "Ninja vcpkg Clean Build",
+      "description": "Clean vcpkg build without Intel optimizations to avoid conflicts",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "toolchainFile": "C:/codedev/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "WHISPER_LIBSNDFILE": "ON",
+        "WHISPER_SDL2": "ON",
+        "WHISPER_CURL": "ON",
+        "WHISPER_CPPRESTSDK": "ON",
+        "WHISPER_TBB": "OFF",
+        "WHISPER_MIMALLOC": "OFF",
+        "WHISPER_MKL": "OFF",
+        "WHISPER_IPP": "OFF",
+        "WHISPER_SYCL": "OFF",
+        "WHISPER_BOOST_STACKTRACE": "ON",
+        "WHISPER_TASKFLOW": "ON",
+        "WHISPER_BUILD_EXAMPLES": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "vs2022-x64",
+      "displayName": "Build with Visual Studio 2022 x64",
+      "configurePreset": "vs2022-x64",
+      "configuration": "Release"
+    },
+    {
+      "name": "vs2022-intel-build",
+      "displayName": "Build with Intel MKL + IPP",
+      "configurePreset": "vs2022-intel-mkl-ipp",
+      "configuration": "Release"
+    },
+    {
+      "name": "ninja-intel-build",
+      "displayName": "Fast Intel Optimized Build",
+      "configurePreset": "ninja-intel-optimized"
+    },
+    {
+      "name": "ninja-intel-core-build",
+      "displayName": "Intel Core Library Build",
+      "configurePreset": "ninja-intel-core-only"
+    },
+    {
+      "name": "vs2022-x64-debug",
+      "displayName": "Debug Build with Visual Studio 2022 x64",
+      "configurePreset": "vs2022-x64-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ninja-release-tbb",
+      "displayName": "Fast Release Build with TBB",
+      "configurePreset": "ninja-release-tbb"
+    },
+    {
+      "name": "vs2022-cuda-build",
+      "displayName": "Build with CUDA (Visual Studio)",
+      "configurePreset": "vs2022-cuda",
+      "configuration": "Release"
+    },
+    {
+      "name": "ninja-cuda-build",
+      "displayName": "Fast CUDA Build (Ninja)",
+      "configurePreset": "ninja-cuda"
+    },
+    {
+      "name": "vs2022-intel-cuda-build",
+      "displayName": "Intel + CUDA Build (Visual Studio)",
+      "configurePreset": "vs2022-intel-cuda",
+      "configuration": "Release"
+    },
+    {
+      "name": "ninja-intel-cuda-build",
+      "displayName": "Fast Intel + CUDA Build (Ninja)",
+      "configurePreset": "ninja-intel-cuda"
+    },
+    {
+      "name": "vs2022-sycl-build",
+      "displayName": "Visual Studio 2022 SYCL Build",
+      "configurePreset": "vs2022-sycl"
+    },
+    {
+      "name": "ninja-sycl-build",
+      "displayName": "Fast SYCL Build (Ninja)",
+      "configurePreset": "ninja-sycl"
+    },
+    {
+      "name": "ninja-intel-sycl-build",
+      "displayName": "Full Intel Stack + SYCL Build (Ninja)",
+      "configurePreset": "ninja-intel-sycl"
+    },
+    {
+      "name": "ninja-vcpkg-full-build",
+      "displayName": "Full vcpkg Dependencies Build (Ninja)",
+      "configurePreset": "ninja-vcpkg-full"
+    },
+    {
+      "name": "ninja-vcpkg-clean-build",
+      "displayName": "Clean vcpkg Build (No Intel Conflicts)",
+      "configurePreset": "ninja-vcpkg-clean"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-vs2022-x64",
+      "displayName": "Test with Visual Studio 2022 x64",
+      "configurePreset": "vs2022-x64",
+      "configuration": "Release"
+    }
+  ]
 }

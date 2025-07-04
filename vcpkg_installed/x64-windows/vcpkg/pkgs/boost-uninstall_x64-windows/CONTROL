@@ -1,0 +1,6 @@
+Package: boost-uninstall
+Version: 1.86.0
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8a4b29d54a9440018201fd684f46f790628aeeb26817c8c2779d72149ba97767
+Description: Internal vcpkg port used to uninstall Boost

@@ -1,0 +1,17 @@
+{
+	"InstallScripts" : 
+	[
+		"T:/projects/whisper.cpp/build_tbb/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/ggml/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/ggml/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/ggml/src/ggml-cpu/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/examples/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/examples/cli/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/examples/bench/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/examples/server/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/examples/quantize/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_tbb/examples/deprecation-warning/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

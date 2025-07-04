@@ -1,0 +1,5 @@
+T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-dbg-CMakeCache.txt.log
+T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-rel-CMakeCache.txt.log
+T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-dbg-CMakeConfigureLog.yaml.log
+T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-rel-CMakeConfigureLog.yaml.log
+T:\projects\whisper.cpp\vcpkg_installed\x64-windows\vcpkg\blds\yasm\config-x64-windows-out.log

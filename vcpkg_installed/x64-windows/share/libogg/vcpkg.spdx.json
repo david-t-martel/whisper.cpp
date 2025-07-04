@@ -1,0 +1,110 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/libogg-x64-windows-1.3.5#1-1b188e61-26fc-4303-8e44-f714e336b310",
+  "name": "libogg:x64-windows@1.3.5#1 b305c4cb4f499529035601123ba4f011b44ab57653c32f8982dea99c967193ea",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-2025-02-11-bec4296bf5289dc9ce83b4f5095943e44162f9c2"
+    ],
+    "created": "2025-06-21T05:17:43Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "libogg",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "1.3.5#1",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg@98e27727c32704393494d32615c25b7b16eb3067",
+      "homepage": "https://www.xiph.org/ogg",
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "libogg:x64-windows",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "b305c4cb4f499529035601123ba4f011b44ab57653c32f8982dea99c967193ea",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-0",
+      "name": "xiph/ogg",
+      "downloadLocation": "git+https://gitlab.xiph.org/xiph/ogg@v1.3.5",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "72bfad534a459bfca534eae9b209fa630ac20364a82e82f2707b210a40deaf9a7dc9031532a8b27120a9dd66f804655ddce79875758ef14b109bf869e57fb747"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": "./C:/codedev/vcpkg/buildtrees/versioning_/versions/libogg/98e27727c32704393494d32615c25b7b16eb3067/portfile.cmake",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6da25d70a617bd4c7fd18cb2a8acd8d40c1fcc671846195a02ef2dc74a6b463e"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/codedev/vcpkg/buildtrees/versioning_/versions/libogg/98e27727c32704393494d32615c25b7b16eb3067/vcpkg.json",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4d651ca89f0f8d155e659450304e65c168febe7cee7739b30eccda7ac70ebebb"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

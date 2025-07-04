@@ -44,7 +44,7 @@ if (WHISPER_COREML)
         coreml/whisper-encoder-impl.m
         )
 
-    include(DefaultTargetOptions)
+    include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
 
     target_include_directories(${TARGET} PUBLIC
         .
@@ -115,4 +115,26 @@ endif()
 if (BUILD_SHARED_LIBS)
     set_target_properties(whisper PROPERTIES POSITION_INDEPENDENT_CODE ON)
     target_compile_definitions(whisper PRIVATE WHISPER_SHARED WHISPER_BUILD)
+endif()
+
+# Handle DLL copying for Windows (only copy if files exist)
+if(WIN32 AND WHISPER_MIMALLOC AND DEFINED MIMALLOC_BIN_DIR)
+    # Check if DLLs exist before trying to copy them
+    if(EXISTS "${MIMALLOC_BIN_DIR}/mimalloc-redirect.dll")
+        add_custom_command(TARGET whisper POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${MIMALLOC_BIN_DIR}/mimalloc-redirect.dll"
+            "$<TARGET_FILE_DIR:whisper>/mimalloc-redirect.dll"
+            COMMENT "Copying mimalloc-redirect.dll to output directory"
+        )
+    endif()
+
+    if(EXISTS "${MIMALLOC_BIN_DIR}/mimalloc-override.dll")
+        add_custom_command(TARGET whisper POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${MIMALLOC_BIN_DIR}/mimalloc-override.dll"
+            "$<TARGET_FILE_DIR:whisper>/mimalloc-override.dll"
+            COMMENT "Copying mimalloc-override.dll to output directory"
+        )
+    endif()
 endif()

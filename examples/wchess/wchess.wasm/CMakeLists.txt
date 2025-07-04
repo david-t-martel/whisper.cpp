@@ -4,7 +4,7 @@ add_executable(${TARGET}
     wchess.wasm.cpp
     )
 
-include(DefaultTargetOptions)
+include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
 
 target_link_libraries(${TARGET} PRIVATE
     common

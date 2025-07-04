@@ -1,0 +1,448 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 4eb9fb97da1e341947c6fa3049d0e434ff7837ca2b13cd968b94cca3e33ea648
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 89f84b8a160f5725b151cf7c479b8b03d8938b37349ca4446dc2672b97b32c3e
+Status: install ok installed
+
+Package: vcpkg-boost
+Version: 2024-05-15
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8345372a6e34e4669f0d7b67310b8cfe71a2d7751bf8e8069b751a7bfe546105
+Status: install ok installed
+
+Package: boost-uninstall
+Version: 1.86.0
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 1e5c6a29dd3f52b551bdb13a4583a6c1bc83ef191031b975762c4bf25336d7d9
+Description: Internal vcpkg port used to uninstall Boost
+Status: install ok installed
+
+Package: boost-cmake
+Version: 1.86.0
+Depends: boost-uninstall, vcpkg-boost, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b6eac6060a47f1a4193e8715cadab9a363065d3523858d3ba41be71a7f1f9037
+Description: Boost CMake support infrastructure
+Status: install ok installed
+
+Package: boost-headers
+Version: 1.86.0
+Depends: boost-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 924c90adf9c4673e8d58e0c80623517db3f0ced7a8a6ec374f3dada9389eeb2b
+Description: Boost headers module
+Status: install ok installed
+
+Package: boost-config
+Version: 1.86.0
+Depends: boost-cmake, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 93b5ebe3ff84c5146dc18089b437882d2e93572632ae2c126e0ddfc1be413cfb
+Description: Boost config module
+Status: install ok installed
+
+Package: boost-predef
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: e8e3ddc7cf946d06fbf0718b49af43b53a005c13bd549dc9e20909d788fa3631
+Description: Boost predef module
+Status: install ok installed
+
+Package: boost-winapi
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers, boost-predef
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 4ba1897e37adc27a0b608440a897ea6a37249c066b42f60ded7a5efaedd6827a
+Description: Boost winapi module
+Status: install ok installed
+
+Package: boost-assert
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 067db22e2c8cb7488d2d77265456523842ecea1a3c5854459f487967172e6cec
+Description: Boost assert module
+Status: install ok installed
+
+Package: boost-throw-exception
+Version: 1.86.0
+Depends: boost-assert, boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b565b6370cf235e22549f42f4b5e1d5860ff2db03a57a9aaa40d2a81e8e90649
+Description: Boost throw_exception module
+Status: install ok installed
+
+Package: boost-static-assert
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5041c9bb330e6cc20d7245f1c840cdc9d6b3dd96656cad558d4f6cb0582f482e
+Description: Boost static_assert module
+Status: install ok installed
+
+Package: boost-core
+Version: 1.86.0
+Depends: boost-assert, boost-cmake, boost-config, boost-headers, boost-static-assert, boost-throw-exception
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5e4611a7741c861314b6b94d7ee45567c31378c5ea2de8e832bec45c59fc749b
+Description: Boost core module
+Status: install ok installed
+
+Package: boost-mp11
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 606942bb0febc629220942850a5550d7b674d5b6b059ab4e6778fd674c946321
+Description: Boost mp11 module
+Status: install ok installed
+
+Package: boost-describe
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers, boost-mp11
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 96964748b1541c3ce5808def391c6967f5983607d6cce238ab8c2f338492b47d
+Description: Boost describe module
+Status: install ok installed
+
+Package: boost-container-hash
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-describe, boost-headers, boost-mp11
+Architecture: x64-windows
+Multi-Arch: same
+Abi: c1e1a70e9a8e5891c7ab74e2f5d84eec42be6bed7a893b5c01a44f7cab793950
+Description: Boost container_hash module
+Status: install ok installed
+
+Package: boost-stacktrace
+Version: 1.86.0
+Depends: boost-assert, boost-cmake, boost-config, boost-container-hash, boost-core, boost-headers, boost-predef, boost-winapi
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 18b936979135a6ffaed4895d8cd2e91a785c8e7d04e782f58166aebe87778372
+Description: Boost stacktrace module
+Default-Features: windbg
+Status: install ok installed
+
+Package: boost-stacktrace
+Feature: windbg
+Architecture: x64-windows
+Multi-Arch: same
+Description: Use boost_stacktrace_windbg
+Status: install ok installed
+
+Package: zlib
+Version: 1.3.1
+Depends: vcpkg-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 81e8e18efeef43b1c237ae2c506ff6a25b3ade40e50cdf61a488b5c9c7797ec7
+Description: A compression library
+Status: install ok installed
+
+Package: brotli
+Version: 1.1.0
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 2e66c53d8faace50d75c0ce863681de8aa9af58ae2fb3f793db881f22a8d8f1f
+Description: a generic-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling.
+Status: install ok installed
+
+Package: cpprestsdk
+Version: 2.10.18
+Port-Version: 4
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b095e66c4d038deeb888153bf2db834ec80d44b42c01f33c28bfc1ea735f1ee0
+Description: C++11 JSON, REST, and OAuth library
+    The C++ REST SDK is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
+Default-Features: brotli, compression
+Status: install ok installed
+
+Package: cpprestsdk
+Feature: brotli
+Depends: brotli
+Architecture: x64-windows
+Multi-Arch: same
+Description: Brotli compression support
+Status: install ok installed
+
+Package: cpprestsdk
+Feature: compression
+Depends: zlib
+Architecture: x64-windows
+Multi-Arch: same
+Description: HTTP Compression support
+Status: install ok installed
+
+Package: curl
+Version: 8.12.1
+Depends: vcpkg-cmake, vcpkg-cmake-config, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 415197042f332cc8314f9e0554621d1943d9e6e157477a3066caf4f0c6e2c5a4
+Description: A library for transferring data with URLs
+Default-Features: non-http, ssl
+Status: install ok installed
+
+Package: curl
+Feature: non-http
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enables protocols beyond HTTP/HTTPS/HTTP2
+Status: install ok installed
+
+Package: curl
+Feature: schannel
+Architecture: x64-windows
+Multi-Arch: same
+Description: SSL support (Secure Channel)
+Status: install ok installed
+
+Package: curl
+Feature: ssl
+Architecture: x64-windows
+Multi-Arch: same
+Description: Default SSL backend
+Status: install ok installed
+
+Package: curl
+Feature: sspi
+Architecture: x64-windows
+Multi-Arch: same
+Description: SSPI support
+Status: install ok installed
+
+Package: yasm
+Version: 1.3.0
+Port-Version: 6
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: a0e4bf8f3ab21d0347fcd98634dac1d3248c66f35a32abd3beba22f12c9e32ad
+Description: Yasm is a complete rewrite of the NASM assembler under the new BSD License.
+Status: install ok installed
+
+Package: yasm
+Feature: tools
+Architecture: x64-windows
+Multi-Arch: same
+Description: Build yasm tools
+Status: install ok installed
+
+Package: mpg123
+Version: 1.32.9
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config, yasm
+Architecture: x64-windows
+Multi-Arch: same
+Abi: f4dd7eb053b9792208538f9ab0357ea994af9b5b26b17d918486bfca807ef529
+Description: mpg123 is a real time MPEG 1.0/2.0/2.5 audio player/decoder for layers 1, 2 and 3 (MPEG 1.0 layer 3 also known as MP3).
+Status: install ok installed
+
+Package: vcpkg-cmake-get-vars
+Version: 2024-09-22
+Depends: vcpkg-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: e57c18e5dca88a798589741a00ec638625dc5323a3be8bb745f8410a4159a042
+Status: install ok installed
+
+Package: vcpkg-tool-meson
+Version: 1.6.1
+Depends: vcpkg-cmake-get-vars
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ef0494e9562fe19bc9f1ea2fef98fe26e3ff14d0738b8a6cc9881b3385fa2b6a
+Description: Meson build system
+Status: install ok installed
+
+Package: pkgconf
+Version: 2.3.0
+Depends: vcpkg-tool-meson
+Architecture: x64-windows
+Multi-Arch: same
+Abi: bfbb5057135731959e8ecce3fbf4a77ea832e7b1d9e79cb266a474f12421d332
+Description: pkgconf is a program which helps to configure compiler and linker flags for development libraries. It is similar to pkg-config from freedesktop.org.
+Status: install ok installed
+
+Package: vcpkg-pkgconfig-get-modules
+Version: 2024-04-03
+Depends: pkgconf
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ceed6be1768b3e4b6a411d5d28237632f6600b1748ab932db4f7ac479d5caa6e
+Status: install ok installed
+
+Package: vcpkg-msbuild
+Version: 2023-08-08
+Depends: vcpkg-cmake-get-vars, vcpkg-pkgconfig-get-modules
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 3f4ba2f4a5e7d2a9d8d524c407d0a5c792e60673e84ee442239e6b872953eae6
+Status: install ok installed
+
+Package: mp3lame
+Version: 3.100
+Port-Version: 15
+Depends: vcpkg-msbuild
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 33dd4f68bc0dcf6d169da03d81af4448bbcb5e106a9d95c61165506f2d1f5ce3
+Description: LAME is a high quality MPEG Audio Layer III (MP3) encoder licensed under the LGPL.
+Status: install ok installed
+
+Package: opus
+Version: 1.5.2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 580671001e2eb4a8e8d83deb962da291dc61dd06304a73aaef89f71cde0fb328
+Description: Totally open, royalty-free, highly versatile audio codec
+Status: install ok installed
+
+Package: libogg
+Version: 1.3.5
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b305c4cb4f499529035601123ba4f011b44ab57653c32f8982dea99c967193ea
+Description: Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.
+Status: install ok installed
+
+Package: libvorbis
+Version: 1.3.7
+Port-Version: 3
+Depends: libogg, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 6b740672cb107643026c7b77eef8f0285b10e6f7bbf701e8867d441686bcce53
+Description: Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format
+Status: install ok installed
+
+Package: libflac
+Version: 1.4.3
+Port-Version: 2
+Depends: libogg, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5de63128f4b4143968bac79d54de46c72600d3de86acaf8778f8a80d7be55035
+Description: Library for manipulating FLAC files
+Default-Features: stack-protector
+Status: install ok installed
+
+Package: libflac
+Feature: stack-protector
+Architecture: x64-windows
+Multi-Arch: same
+Description: Build with stack smashing protection
+Status: install ok installed
+
+Package: libsndfile
+Version: 1.2.2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: a2b227b41163b19aff910742bc376dffcdc09275ea1c0077dec33f3aa03e324c
+Description: A library for reading and writing audio files
+Default-Features: external-libs, mpeg
+Status: install ok installed
+
+Package: libsndfile
+Feature: external-libs
+Depends: libflac, libvorbis, opus
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable FLAC, Vorbis, and Opus codecs
+Status: install ok installed
+
+Package: libsndfile
+Feature: mpeg
+Depends: mp3lame, mpg123
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable MPEG codecs
+Status: install ok installed
+
+Package: mimalloc
+Version: 2.1.7
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8dab54b0ea07c9071c979f05126eaea60b409d1e733ae5bae4159102fc6b4ddd
+Description: Compact general purpose allocator with excellent performance
+Status: install ok installed
+
+Package: sdl2
+Version: 2.30.12
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: dd253d3788354fa5761f6187888364e3bc389ea94e0274ca572b751e82c56236
+Description: Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
+Status: install ok installed
+
+Package: taskflow
+Version: 3.9.0
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 894f3f4e685c94fda88b5c45ee0594cfc744e63a4156716f480eae9e87f2b1f9
+Description: Fast Parallel Tasking Programming Library using Modern C++
+Status: install ok installed
+
+Package: hwloc
+Version: 2.11.2
+Architecture: x64-windows
+Multi-Arch: same
+Maintainer: bgoglin<Brice.Goglin@inria.fr>
+Abi: 07f64c1a67e4c7fb3e7504c6d563a81e7aef8ef6f5bd8f3eae99fb8b7b2491d5
+Description: Portable Hardware Locality (hwloc)
+    The Portable Hardware Locality (hwloc) software package provides a portable abstraction (across OS, versions, architectures, ...) of the hierarchical topology of modern architectures, including NUMA memory nodes, sockets, shared caches, cores and simultaneous multithreading. It also gathers various system attributes such as cache and memory information as well as the locality of I/O devices such as network interfaces, InfiniBand HCAs or GPUs.
+Status: install ok installed
+
+Package: tbb
+Version: 2022.0.0
+Port-Version: 2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 51c33c04c39acd433959d2939ba0512960e9859244545d279531305168beb45d
+Description: Intel's Threading Building Blocks.
+Default-Features: hwloc
+Status: install ok installed
+
+Package: tbb
+Feature: hwloc
+Depends: hwloc
+Architecture: x64-windows
+Multi-Arch: same
+Description: Builds TBB with TBBBind support for Hybrid CPUs or NUMA architectures.
+Status: install ok installed
+

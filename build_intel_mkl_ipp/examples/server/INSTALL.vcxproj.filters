@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="T:\projects\whisper.cpp\build_intel_mkl_ipp\CMakeFiles\297f24b4707ee7f4516beb535d33e2d1\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A337D149-D2C5-3D2B-9695-0E5025AB51A4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

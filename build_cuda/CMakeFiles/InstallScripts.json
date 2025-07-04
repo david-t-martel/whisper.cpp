@@ -1,0 +1,18 @@
+{
+	"InstallScripts" : 
+	[
+		"T:/projects/whisper.cpp/build_cuda/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/ggml/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/ggml/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/ggml/src/ggml-cpu/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/ggml/src/ggml-cuda/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/examples/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/examples/cli/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/examples/bench/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/examples/server/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/examples/quantize/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_cuda/examples/deprecation-warning/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -212,5 +212,5 @@ EMSCRIPTEN_BINDINGS(stream) {
             std::lock_guard<std::mutex> lock(g_mutex);
             g_status_forced = status;
         }
-    }));
+    })); S
 }

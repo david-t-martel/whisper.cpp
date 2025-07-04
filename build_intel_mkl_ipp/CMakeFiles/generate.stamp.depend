@@ -1,0 +1,55 @@
+# CMake generation dependency list for this directory.
+C:/Program Files (x86)/Intel/oneAPI/mkl/2025.0/lib/cmake/mkl/MKLConfig.cmake
+C:/Program Files (x86)/Intel/oneAPI/mkl/2025.0/lib/cmake/mkl/MKLConfigVersion.cmake
+C:/Program Files (x86)/Intel/oneAPI/tbb/2022.0/lib/cmake/tbb/TBBConfig.cmake
+C:/Program Files (x86)/Intel/oneAPI/tbb/2022.0/lib/cmake/tbb/TBBConfigVersion.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/BasicConfigVersion-SameMajorVersion.cmake.in
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCXXInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeInitializeConfigs.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Compiler/MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Compiler/MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Compiler/MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/FindGit.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/GNUInstallDirs.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeCLinkerInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeCXXLinkerInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeCommonLinkerInformation.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Linker/MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Linker/MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Linker/MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Linker/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Linker/Windows-MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Linker/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows-Initialize.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/WindowsPaths.cmake
+C:/Program Files/CMake/share/cmake-4.0/Modules/WriteBasicConfigVersionFile.cmake
+C:/codedev/vcpkg/installed/x64-windows/share/mimalloc/mimalloc-config-version.cmake
+C:/codedev/vcpkg/installed/x64-windows/share/mimalloc/mimalloc-config.cmake
+C:/codedev/vcpkg/installed/x64-windows/share/mimalloc/mimalloc-debug.cmake
+C:/codedev/vcpkg/installed/x64-windows/share/mimalloc/mimalloc-release.cmake
+C:/codedev/vcpkg/installed/x64-windows/share/mimalloc/mimalloc.cmake
+T:/projects/whisper.cpp/CMakeLists.txt
+T:/projects/whisper.cpp/bindings/javascript/package-tmpl.json
+T:/projects/whisper.cpp/build_intel_mkl_ipp/CMakeFiles/4.0.3/CMakeCCompiler.cmake
+T:/projects/whisper.cpp/build_intel_mkl_ipp/CMakeFiles/4.0.3/CMakeCXXCompiler.cmake
+T:/projects/whisper.cpp/build_intel_mkl_ipp/CMakeFiles/4.0.3/CMakeRCCompiler.cmake
+T:/projects/whisper.cpp/build_intel_mkl_ipp/CMakeFiles/4.0.3/CMakeSystem.cmake
+T:/projects/whisper.cpp/cmake/build-info.cmake
+T:/projects/whisper.cpp/cmake/git-vars.cmake
+T:/projects/whisper.cpp/cmake/whisper-config.cmake.in
+T:/projects/whisper.cpp/cmake/whisper.pc.in

@@ -1,0 +1,17 @@
+{
+	"InstallScripts" : 
+	[
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/ggml/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/ggml/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/ggml/src/ggml-cpu/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/src/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/examples/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/examples/cli/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/examples/bench/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/examples/server/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/examples/quantize/cmake_install.cmake",
+		"T:/projects/whisper.cpp/build_intel_mkl_ipp/examples/deprecation-warning/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

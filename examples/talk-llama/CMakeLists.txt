@@ -35,5 +35,5 @@ if (WHISPER_SDL2)
         target_compile_definitions(${TARGET} PRIVATE -D_WIN32_WINNT=0x0602)
     endif()
 
-    include(DefaultTargetOptions)
+    include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
 endif ()

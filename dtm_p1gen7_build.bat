@@ -8,6 +8,7 @@ set "CUDA_PATH=C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8"
 set "CUDA_ARCH=89"  REM Ada Lovelace architecture (RTX 40xx)
 set "OPENVINO_PATH=C:/Program Files (x86)/Intel/openvino_2024.6.0"
 set "NUM_CORES=%NUMBER_OF_PROCESSORS%"
+set "NINJA_PATH=C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja"
 
 REM -----------------------------------------------------------
 REM 1. ENVIRONMENT VERIFICATION
@@ -50,6 +51,9 @@ call "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build
 
 REM Setup OpenVINO environment
 call "%OPENVINO_PATH%/setupvars.bat"
+
+REM Add Ninja to PATH
+set "PATH=%NINJA_PATH%;%PATH%"
 
 REM Remove any MinGW or other compilers from PATH to avoid conflicts
 set "PATH=%VCPKG_ROOT%;%PATH%"
@@ -118,7 +122,11 @@ if not errorlevel 1 (
     set "CMAKE_GENERATOR_PLATFORM_ARG="
 ) else (
     REM Check for installed Ninja in standard locations
-    if exist "C:/Program Files/Ninja/ninja.exe" (
+    if exist "%NINJA_PATH%/ninja.exe" (
+        set "PATH=%NINJA_PATH%;%PATH%"
+        set "CMAKE_GENERATOR=Ninja"
+        set "CMAKE_GENERATOR_PLATFORM_ARG="
+    ) else if exist "C:/Program Files/Ninja/ninja.exe" (
         set "PATH=C:/Program Files/Ninja;%PATH%"
         set "CMAKE_GENERATOR=Ninja"
         set "CMAKE_GENERATOR_PLATFORM_ARG="

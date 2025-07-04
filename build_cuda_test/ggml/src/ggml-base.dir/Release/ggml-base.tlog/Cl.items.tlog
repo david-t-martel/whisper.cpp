@@ -1,0 +1,7 @@
+T:\projects\whisper.cpp\ggml\src\ggml.c;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\ggml.obj
+T:\projects\whisper.cpp\ggml\src\ggml-alloc.c;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\ggml-alloc.obj
+T:\projects\whisper.cpp\ggml\src\ggml-backend.cpp;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\ggml-backend.obj
+T:\projects\whisper.cpp\ggml\src\ggml-opt.cpp;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\ggml-opt.obj
+T:\projects\whisper.cpp\ggml\src\ggml-threading.cpp;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\ggml-threading.obj
+T:\projects\whisper.cpp\ggml\src\ggml-quants.c;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\ggml-quants.obj
+T:\projects\whisper.cpp\ggml\src\gguf.cpp;T:\projects\whisper.cpp\build_cuda_test\ggml\src\ggml-base.dir\Release\gguf.obj

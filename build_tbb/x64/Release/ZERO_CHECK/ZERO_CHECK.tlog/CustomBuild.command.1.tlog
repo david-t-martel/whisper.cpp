@@ -1,0 +1,10 @@
+^T:\PROJECTS\WHISPER.CPP\BUILD_TBB\CMAKEFILES\86956413D8C7362EBB30026BC8B62B12\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -ST:/projects/whisper.cpp -BT:/projects/whisper.cpp/build_tbb --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file T:/projects/whisper.cpp/build_tbb/whisper.cpp.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,239 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: a8e658726c039d2118c9a6685af48e7bcde4af02104673762f2951c0aba50a92
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: dbe38db85d817689017a9e47e1eb62cc08504715e5d076dc454c47fb8e8179c8
+Status: install ok installed
+
+Package: vcpkg-boost
+Version: 2024-05-15
+Architecture: x64-windows
+Multi-Arch: same
+Abi: d4df27a1192aabfe482fb52541cc8459fd046b3fe31eca4b1052cffa4542566d
+Status: install ok installed
+
+Package: boost-uninstall
+Version: 1.86.0
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8a4b29d54a9440018201fd684f46f790628aeeb26817c8c2779d72149ba97767
+Description: Internal vcpkg port used to uninstall Boost
+Status: install ok installed
+
+Package: boost-cmake
+Version: 1.86.0
+Depends: boost-uninstall, vcpkg-boost, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 36f294e9658b3e188101e76b0110f2a4e5c345204a98e5751b61b4783b00203c
+Description: Boost CMake support infrastructure
+Status: install ok installed
+
+Package: boost-headers
+Version: 1.86.0
+Depends: boost-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: a0f8e75ef9ccd26e9d691e21561f35d73abad26bbe8e401e65a2bf80dfe3cf18
+Description: Boost headers module
+Status: install ok installed
+
+Package: boost-config
+Version: 1.86.0
+Depends: boost-cmake, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 92a5fc8580fc791a9eda637ae051c9e05a3136935fa3efc83eef861cb98398c4
+Description: Boost config module
+Status: install ok installed
+
+Package: boost-predef
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: cf5e9c487335ddd3f00918babcd93c761bf5a6033c8425182b1eff307440881c
+Description: Boost predef module
+Status: install ok installed
+
+Package: boost-winapi
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers, boost-predef
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 4f01c0d9969ed28efc34e416280cc90cbcaf5a1be8e5e9e0d414d53b02b25a35
+Description: Boost winapi module
+Status: install ok installed
+
+Package: boost-assert
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: f2b3e73924124b9d4b34d8f6e14656cf2c8586c4861069d5883ea5f32e1c67dc
+Description: Boost assert module
+Status: install ok installed
+
+Package: boost-throw-exception
+Version: 1.86.0
+Depends: boost-assert, boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: d72cd0f80ed01c69c4b93f53233eef0ad2ec6ed4afb0048edd171c972a2e1831
+Description: Boost throw_exception module
+Status: install ok installed
+
+Package: boost-static-assert
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 7be9283ce126cb7835356984e89dcd3317968a723551e5ddcc1b17e7f36dbbcd
+Description: Boost static_assert module
+Status: install ok installed
+
+Package: boost-core
+Version: 1.86.0
+Depends: boost-assert, boost-cmake, boost-config, boost-headers, boost-static-assert, boost-throw-exception
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 59c4250cfb972cb60fdaace9cd3cc16026b3418bd6e47bc0f43952e0e80313d9
+Description: Boost core module
+Status: install ok installed
+
+Package: boost-mp11
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 287873e8cd62cbbda82b8c00dfb0dd962d31f613c83eca02a92806f327782454
+Description: Boost mp11 module
+Status: install ok installed
+
+Package: boost-describe
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-headers, boost-mp11
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 53cbfd4f83e7276a87366e25143837e50e25acd298928c1f7a7a6231c49f2f57
+Description: Boost describe module
+Status: install ok installed
+
+Package: boost-container-hash
+Version: 1.86.0
+Depends: boost-cmake, boost-config, boost-describe, boost-headers, boost-mp11
+Architecture: x64-windows
+Multi-Arch: same
+Abi: d3867d720dc21df97a0721d85634ee41d9739cea475db1439eafdfa7671aacf8
+Description: Boost container_hash module
+Status: install ok installed
+
+Package: boost-stacktrace
+Version: 1.86.0
+Depends: boost-assert, boost-cmake, boost-config, boost-container-hash, boost-core, boost-headers, boost-predef, boost-winapi
+Architecture: x64-windows
+Multi-Arch: same
+Abi: c4c0ff61b4857b744e828b08f3bfd31272dbe149998bd834f38d487c41c8bf02
+Description: Boost stacktrace module
+Default-Features: windbg
+Status: install ok installed
+
+Package: boost-stacktrace
+Feature: windbg
+Architecture: x64-windows
+Multi-Arch: same
+Description: Use boost_stacktrace_windbg
+Status: install ok installed
+
+Package: zlib
+Version: 1.3.1
+Depends: vcpkg-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: d3cefb57701e17db9f6dd1c7570b0342db929edfd0f00afbb233eff44e9ad7fd
+Description: A compression library
+Status: install ok installed
+
+Package: brotli
+Version: 1.1.0
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 266f653ab1d3fe59110e97f644e8b727b00c6be9ef4ced37ec0346346ac873d5
+Description: a generic-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling.
+Status: install ok installed
+
+Package: cpprestsdk
+Version: 2.10.18
+Port-Version: 4
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ae3a6f5d1fe38d6b21fe8afb89344ec09bd52ea176452c17af4ec23676d3e069
+Description: C++11 JSON, REST, and OAuth library
+    The C++ REST SDK is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
+Default-Features: brotli, compression
+Status: install ok installed
+
+Package: cpprestsdk
+Feature: brotli
+Depends: brotli
+Architecture: x64-windows
+Multi-Arch: same
+Description: Brotli compression support
+Status: install ok installed
+
+Package: cpprestsdk
+Feature: compression
+Depends: zlib
+Architecture: x64-windows
+Multi-Arch: same
+Description: HTTP Compression support
+Status: install ok installed
+
+Package: curl
+Version: 8.12.1
+Depends: vcpkg-cmake, vcpkg-cmake-config, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 61cecd2b1ff893ba8d0291f98d1025644fba8fca700d295e86a85ab81155efa5
+Description: A library for transferring data with URLs
+Default-Features: non-http, ssl
+Status: install ok installed
+
+Package: curl
+Feature: non-http
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enables protocols beyond HTTP/HTTPS/HTTP2
+Status: install ok installed
+
+Package: curl
+Feature: schannel
+Architecture: x64-windows
+Multi-Arch: same
+Description: SSL support (Secure Channel)
+Status: install ok installed
+
+Package: curl
+Feature: ssl
+Architecture: x64-windows
+Multi-Arch: same
+Description: Default SSL backend
+Status: install ok installed
+
+Package: curl
+Feature: sspi
+Architecture: x64-windows
+Multi-Arch: same
+Description: SSPI support
+Status: install ok installed
+

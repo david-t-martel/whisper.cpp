@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="T:\projects\whisper.cpp\examples\common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\examples\common-ggml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\examples\grammar-parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="T:\projects\whisper.cpp\examples\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\examples\common-ggml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\examples\grammar-parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="T:\projects\whisper.cpp\examples\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{119DF98B-9EED-3A89-B225-2E309ED6D152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3499EA3E-6A92-328A-BD69-00430D0F065A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

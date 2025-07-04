@@ -1,4 +1,4 @@
-# Install script for directory: C:/codedev/whisper.cpp/ggml
+# Install script for directory: T:/projects/whisper.cpp/ggml
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,47 +32,53 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/codedev/msys64/ucrt64/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/codedev/msys64/mingw64/bin/objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/codedev/whisper.cpp/ggml/src/cmake_install.cmake")
+  include("T:/projects/whisper.cpp/ggml/src/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/codedev/whisper.cpp/ggml/src/ggml.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "T:/projects/whisper.cpp/ggml/src/ggml.a")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-    "C:/codedev/whisper.cpp/ggml/include/ggml.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-cpu.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-alloc.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-backend.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-blas.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-cann.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-cuda.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-kompute.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-opt.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-metal.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-rpc.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-sycl.h"
-    "C:/codedev/whisper.cpp/ggml/include/ggml-vulkan.h"
-    "C:/codedev/whisper.cpp/ggml/include/gguf.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-cpu.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-alloc.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-backend.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-blas.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-cann.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-cuda.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-kompute.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-opt.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-metal.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-rpc.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-sycl.h"
+    "T:/projects/whisper.cpp/ggml/include/ggml-vulkan.h"
+    "T:/projects/whisper.cpp/ggml/include/gguf.h"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/codedev/whisper.cpp/ggml/src/ggml-base.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "T:/projects/whisper.cpp/ggml/src/ggml-base.a")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/ggml" TYPE FILE FILES
-    "C:/codedev/whisper.cpp/ggml/ggml-config.cmake"
-    "C:/codedev/whisper.cpp/ggml/ggml-version.cmake"
+    "T:/projects/whisper.cpp/ggml/ggml-config.cmake"
+    "T:/projects/whisper.cpp/ggml/ggml-version.cmake"
     )
 endif()
 
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+if(CMAKE_INSTALL_LOCAL_ONLY)
+  file(WRITE "T:/projects/whisper.cpp/ggml/install_local_manifest.txt"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+endif()

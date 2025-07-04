@@ -1,0 +1,1047 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.26100 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.14.10+8b8e13593 for .NET Framework
+      Build started 6/20/2025 4:40:00 PM.
+      
+      Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\4.0.3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      VcpkgCheckManifestRoot:
+        The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+      ClCompile:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\4.0.3\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\4.0.3\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.04
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        T:/projects/whisper.cpp/build/CMakeFiles/4.0.3/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.14.10+8b8e13593 for .NET Framework
+      Build started 6/20/2025 4:40:01 PM.
+      
+      Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\4.0.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      VcpkgCheckManifestRoot:
+        The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+      ClCompile:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\4.0.3\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\4.0.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.03
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        T:/projects/whisper.cpp/build/CMakeFiles/4.0.3/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-5m0ap7"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-5m0ap7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-5m0ap7'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_fd83a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:02 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5m0ap7\\cmTC_fd83a.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_fd83a.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5m0ap7\\Debug\\".
+          Creating directory "cmTC_fd83a.dir\\Debug\\cmTC_fd83a.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_fd83a.dir\\Debug\\cmTC_fd83a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_fd83a.dir\\Debug\\cmTC_fd83a.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fd83a.dir\\Debug\\\\" /Fd"cmTC_fd83a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fd83a.dir\\Debug\\\\" /Fd"cmTC_fd83a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5m0ap7\\Debug\\cmTC_fd83a.exe" /INCREMENTAL /ILK:"cmTC_fd83a.dir\\Debug\\cmTC_fd83a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-5m0ap7/Debug/cmTC_fd83a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-5m0ap7/Debug/cmTC_fd83a.lib" /MACHINE:X64  /machine:x64 cmTC_fd83a.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_fd83a.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5m0ap7\\Debug\\cmTC_fd83a.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_fd83a.dir\\Debug\\cmTC_fd83a.tlog\\unsuccessfulbuild".
+          Touching "cmTC_fd83a.dir\\Debug\\cmTC_fd83a.tlog\\cmTC_fd83a.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5m0ap7\\cmTC_fd83a.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.83
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.44.35209.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bp373n"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bp373n"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bp373n'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f3f95.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:04 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bp373n\\cmTC_f3f95.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_f3f95.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bp373n\\Debug\\".
+          Creating directory "cmTC_f3f95.dir\\Debug\\cmTC_f3f95.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_f3f95.dir\\Debug\\cmTC_f3f95.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_f3f95.dir\\Debug\\cmTC_f3f95.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f3f95.dir\\Debug\\\\" /Fd"cmTC_f3f95.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f3f95.dir\\Debug\\\\" /Fd"cmTC_f3f95.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bp373n\\Debug\\cmTC_f3f95.exe" /INCREMENTAL /ILK:"cmTC_f3f95.dir\\Debug\\cmTC_f3f95.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bp373n/Debug/cmTC_f3f95.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bp373n/Debug/cmTC_f3f95.lib" /MACHINE:X64  /machine:x64 cmTC_f3f95.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_f3f95.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bp373n\\Debug\\cmTC_f3f95.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_f3f95.dir\\Debug\\cmTC_f3f95.tlog\\unsuccessfulbuild".
+          Touching "cmTC_f3f95.dir\\Debug\\cmTC_f3f95.tlog\\cmTC_f3f95.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bp373n\\cmTC_f3f95.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.72
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.44.35209.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:97 (check_c_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "ggml/CMakeLists.txt:210 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-h392ck"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-h392ck"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-h392ck'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ab364.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:05 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\cmTC_ab364.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_ab364.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\Debug\\".
+          Creating directory "cmTC_ab364.dir\\Debug\\cmTC_ab364.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_ab364.dir\\Debug\\cmTC_ab364.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_ab364.dir\\Debug\\cmTC_ab364.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_ab364.dir\\Debug\\\\" /Fd"cmTC_ab364.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_ab364.dir\\Debug\\\\" /Fd"cmTC_ab364.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\src.c"
+          src.c
+        T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\src.c(1,1): error C1083: Cannot open include file: 'pthread.h': No such file or directory [T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\cmTC_ab364.vcxproj]
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\cmTC_ab364.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\cmTC_ab364.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\src.c(1,1): error C1083: Cannot open include file: 'pthread.h': No such file or directory [T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h392ck\\cmTC_ab364.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.52
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:112 (check_library_exists)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "ggml/CMakeLists.txt:210 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-0yne4w"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-0yne4w"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-0yne4w'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_2b7a9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:06 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\cmTC_2b7a9.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_2b7a9.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\Debug\\".
+          Creating directory "cmTC_2b7a9.dir\\Debug\\cmTC_2b7a9.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_2b7a9.dir\\Debug\\cmTC_2b7a9.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_2b7a9.dir\\Debug\\cmTC_2b7a9.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_2b7a9.dir\\Debug\\\\" /Fd"cmTC_2b7a9.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_2b7a9.dir\\Debug\\\\" /Fd"cmTC_2b7a9.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\Debug\\cmTC_2b7a9.exe" /INCREMENTAL /ILK:"cmTC_2b7a9.dir\\Debug\\cmTC_2b7a9.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-0yne4w/Debug/cmTC_2b7a9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-0yne4w/Debug/cmTC_2b7a9.lib" /MACHINE:X64  /machine:x64 cmTC_2b7a9.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\cmTC_2b7a9.vcxproj]
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\cmTC_2b7a9.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\cmTC_2b7a9.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0yne4w\\cmTC_2b7a9.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.55
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:112 (check_library_exists)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "ggml/CMakeLists.txt:210 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-wossif"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-wossif"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-wossif'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9c843.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:07 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\cmTC_9c843.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_9c843.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\Debug\\".
+          Creating directory "cmTC_9c843.dir\\Debug\\cmTC_9c843.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_9c843.dir\\Debug\\cmTC_9c843.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_9c843.dir\\Debug\\cmTC_9c843.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_9c843.dir\\Debug\\\\" /Fd"cmTC_9c843.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_9c843.dir\\Debug\\\\" /Fd"cmTC_9c843.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\Debug\\cmTC_9c843.exe" /INCREMENTAL /ILK:"cmTC_9c843.dir\\Debug\\cmTC_9c843.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-wossif/Debug/cmTC_9c843.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-wossif/Debug/cmTC_9c843.lib" /MACHINE:X64  /machine:x64 cmTC_9c843.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\cmTC_9c843.vcxproj]
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\cmTC_9c843.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\cmTC_9c843.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wossif\\cmTC_9c843.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.77
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:250 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:557 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:47 (find_package)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbtk4"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbtk4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_openmp"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbtk4'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e79e9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:08 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\cmTC_e79e9.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_e79e9.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\Debug\\".
+          Creating directory "cmTC_e79e9.dir\\Debug\\cmTC_e79e9.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_e79e9.dir\\Debug\\cmTC_e79e9.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e79e9.dir\\Debug\\cmTC_e79e9.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c11 /Fo"cmTC_e79e9.dir\\Debug\\\\" /Fd"cmTC_e79e9.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\OpenMPTryFlag.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c11 /Fo"cmTC_e79e9.dir\\Debug\\\\" /Fd"cmTC_e79e9.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\OpenMPTryFlag.c"
+          OpenMPTryFlag.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\Debug\\cmTC_e79e9.exe" /INCREMENTAL /ILK:"cmTC_e79e9.dir\\Debug\\cmTC_e79e9.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbtk4/Debug/cmTC_e79e9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbtk4/Debug/cmTC_e79e9.lib" /MACHINE:X64  /machine:x64 cmTC_e79e9.dir\\Debug\\OpenMPTryFlag.obj
+          cmTC_e79e9.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\Debug\\cmTC_e79e9.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_e79e9.dir\\Debug\\cmTC_e79e9.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e79e9.dir\\Debug\\cmTC_e79e9.tlog\\cmTC_e79e9.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbtk4\\cmTC_e79e9.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.85
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:250 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:557 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:47 (find_package)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbmm2"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbmm2"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_openmp"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbmm2'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_beedb.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:09 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\cmTC_beedb.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_beedb.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\Debug\\".
+          Creating directory "cmTC_beedb.dir\\Debug\\cmTC_beedb.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_beedb.dir\\Debug\\cmTC_beedb.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_beedb.dir\\Debug\\cmTC_beedb.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c++17 /Fo"cmTC_beedb.dir\\Debug\\\\" /Fd"cmTC_beedb.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\OpenMPTryFlag.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c++17 /Fo"cmTC_beedb.dir\\Debug\\\\" /Fd"cmTC_beedb.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\OpenMPTryFlag.cpp"
+          OpenMPTryFlag.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\Debug\\cmTC_beedb.exe" /INCREMENTAL /ILK:"cmTC_beedb.dir\\Debug\\cmTC_beedb.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbmm2/Debug/cmTC_beedb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jfbmm2/Debug/cmTC_beedb.lib" /MACHINE:X64  /machine:x64 cmTC_beedb.dir\\Debug\\OpenMPTryFlag.obj
+          cmTC_beedb.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\Debug\\cmTC_beedb.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_beedb.dir\\Debug\\cmTC_beedb.tlog\\unsuccessfulbuild".
+          Touching "cmTC_beedb.dir\\Debug\\cmTC_beedb.tlog\\cmTC_beedb.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-jfbmm2\\cmTC_beedb.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.93
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:491 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:631 (_OPENMP_GET_SPEC_DATE)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:47 (find_package)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    description: "Detecting C OpenMP version"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fwnppo"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fwnppo"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "OpenMP_SPECTEST_C_"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fwnppo'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c28fd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:10 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\cmTC_c28fd.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_c28fd.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\Debug\\".
+          Creating directory "cmTC_c28fd.dir\\Debug\\cmTC_c28fd.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_c28fd.dir\\Debug\\cmTC_c28fd.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_c28fd.dir\\Debug\\cmTC_c28fd.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c11 /Fo"cmTC_c28fd.dir\\Debug\\\\" /Fd"cmTC_c28fd.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\OpenMPCheckVersion.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c11 /Fo"cmTC_c28fd.dir\\Debug\\\\" /Fd"cmTC_c28fd.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\OpenMPCheckVersion.c"
+          OpenMPCheckVersion.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\Debug\\cmTC_c28fd.exe" /INCREMENTAL /ILK:"cmTC_c28fd.dir\\Debug\\cmTC_c28fd.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fwnppo/Debug/cmTC_c28fd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fwnppo/Debug/cmTC_c28fd.lib" /MACHINE:X64  /machine:x64 cmTC_c28fd.dir\\Debug\\OpenMPCheckVersion.obj
+          cmTC_c28fd.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\Debug\\cmTC_c28fd.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_c28fd.dir\\Debug\\cmTC_c28fd.tlog\\unsuccessfulbuild".
+          Touching "cmTC_c28fd.dir\\Debug\\cmTC_c28fd.tlog\\cmTC_c28fd.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwnppo\\cmTC_c28fd.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.94
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:491 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:631 (_OPENMP_GET_SPEC_DATE)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:47 (find_package)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    description: "Detecting CXX OpenMP version"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-y84dc2"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-y84dc2"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "OpenMP_SPECTEST_CXX_"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-y84dc2'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0ba5e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:11 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\cmTC_0ba5e.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_0ba5e.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\Debug\\".
+          Creating directory "cmTC_0ba5e.dir\\Debug\\cmTC_0ba5e.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_0ba5e.dir\\Debug\\cmTC_0ba5e.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_0ba5e.dir\\Debug\\cmTC_0ba5e.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c++17 /Fo"cmTC_0ba5e.dir\\Debug\\\\" /Fd"cmTC_0ba5e.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\OpenMPCheckVersion.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /std:c++17 /Fo"cmTC_0ba5e.dir\\Debug\\\\" /Fd"cmTC_0ba5e.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\OpenMPCheckVersion.cpp"
+          OpenMPCheckVersion.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\Debug\\cmTC_0ba5e.exe" /INCREMENTAL /ILK:"cmTC_0ba5e.dir\\Debug\\cmTC_0ba5e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-y84dc2/Debug/cmTC_0ba5e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-y84dc2/Debug/cmTC_0ba5e.lib" /MACHINE:X64  /machine:x64 cmTC_0ba5e.dir\\Debug\\OpenMPCheckVersion.obj
+          cmTC_0ba5e.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\Debug\\cmTC_0ba5e.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_0ba5e.dir\\Debug\\cmTC_0ba5e.tlog\\unsuccessfulbuild".
+          Touching "cmTC_0ba5e.dir\\Debug\\cmTC_0ba5e.tlog\\cmTC_0ba5e.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y84dc2\\cmTC_0ba5e.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.16
+        
+      exitCode: 0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceRuns.cmake:95 (try_run)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceRuns.cmake:52 (cmake_check_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:61 (check_c_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:80 (check_sse)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:170 (include)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    checks:
+      - "Performing Test HAS_AVX_1"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bbih5u"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bbih5u"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "HAS_AVX_1_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bbih5u'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_22d9a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:13 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\cmTC_22d9a.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_22d9a.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\Debug\\".
+          Creating directory "cmTC_22d9a.dir\\Debug\\cmTC_22d9a.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_22d9a.dir\\Debug\\cmTC_22d9a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_22d9a.dir\\Debug\\cmTC_22d9a.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_22d9a.dir\\Debug\\\\" /Fd"cmTC_22d9a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_22d9a.dir\\Debug\\\\" /Fd"cmTC_22d9a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\src.c"
+          src.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\Debug\\cmTC_22d9a.exe" /INCREMENTAL /ILK:"cmTC_22d9a.dir\\Debug\\cmTC_22d9a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bbih5u/Debug/cmTC_22d9a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-bbih5u/Debug/cmTC_22d9a.lib" /MACHINE:X64  /machine:x64 cmTC_22d9a.dir\\Debug\\src.obj
+          cmTC_22d9a.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\Debug\\cmTC_22d9a.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_22d9a.dir\\Debug\\cmTC_22d9a.tlog\\unsuccessfulbuild".
+          Touching "cmTC_22d9a.dir\\Debug\\cmTC_22d9a.tlog\\cmTC_22d9a.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bbih5u\\cmTC_22d9a.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.00
+        
+      exitCode: 0
+    runResult:
+      variable: "HAS_AVX_1_EXITCODE"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceRuns.cmake:95 (try_run)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceRuns.cmake:52 (cmake_check_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:61 (check_c_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:87 (check_sse)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:170 (include)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    checks:
+      - "Performing Test HAS_AVX2_1"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-rdivgg"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-rdivgg"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "HAS_AVX2_1_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-rdivgg'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a76ae.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:14 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\cmTC_a76ae.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_a76ae.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\Debug\\".
+          Creating directory "cmTC_a76ae.dir\\Debug\\cmTC_a76ae.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_a76ae.dir\\Debug\\cmTC_a76ae.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_a76ae.dir\\Debug\\cmTC_a76ae.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX2_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_a76ae.dir\\Debug\\\\" /Fd"cmTC_a76ae.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX2_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_a76ae.dir\\Debug\\\\" /Fd"cmTC_a76ae.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\src.c"
+          src.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\Debug\\cmTC_a76ae.exe" /INCREMENTAL /ILK:"cmTC_a76ae.dir\\Debug\\cmTC_a76ae.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-rdivgg/Debug/cmTC_a76ae.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-rdivgg/Debug/cmTC_a76ae.lib" /MACHINE:X64  /machine:x64 cmTC_a76ae.dir\\Debug\\src.obj
+          cmTC_a76ae.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\Debug\\cmTC_a76ae.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_a76ae.dir\\Debug\\cmTC_a76ae.tlog\\unsuccessfulbuild".
+          Touching "cmTC_a76ae.dir\\Debug\\cmTC_a76ae.tlog\\cmTC_a76ae.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rdivgg\\cmTC_a76ae.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.99
+        
+      exitCode: 0
+    runResult:
+      variable: "HAS_AVX2_1_EXITCODE"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceRuns.cmake:95 (try_run)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceRuns.cmake:52 (cmake_check_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:61 (check_c_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:88 (check_sse)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:170 (include)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    checks:
+      - "Performing Test HAS_FMA_1"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-vdvr6z"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-vdvr6z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "HAS_FMA_1_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-vdvr6z'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0f487.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:16 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\cmTC_0f487.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_0f487.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\Debug\\".
+          Creating directory "cmTC_0f487.dir\\Debug\\cmTC_0f487.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_0f487.dir\\Debug\\cmTC_0f487.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_0f487.dir\\Debug\\cmTC_0f487.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_FMA_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_0f487.dir\\Debug\\\\" /Fd"cmTC_0f487.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_FMA_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_0f487.dir\\Debug\\\\" /Fd"cmTC_0f487.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\src.c"
+          src.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\Debug\\cmTC_0f487.exe" /INCREMENTAL /ILK:"cmTC_0f487.dir\\Debug\\cmTC_0f487.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-vdvr6z/Debug/cmTC_0f487.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-vdvr6z/Debug/cmTC_0f487.lib" /MACHINE:X64  /machine:x64 cmTC_0f487.dir\\Debug\\src.obj
+          cmTC_0f487.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\Debug\\cmTC_0f487.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_0f487.dir\\Debug\\cmTC_0f487.tlog\\unsuccessfulbuild".
+          Touching "cmTC_0f487.dir\\Debug\\cmTC_0f487.tlog\\cmTC_0f487.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vdvr6z\\cmTC_0f487.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.88
+        
+      exitCode: 0
+    runResult:
+      variable: "HAS_FMA_1_EXITCODE"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceRuns.cmake:95 (try_run)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceRuns.cmake:52 (cmake_check_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:61 (check_c_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:95 (check_sse)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:170 (include)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    checks:
+      - "Performing Test HAS_AVX512_1"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ve1mf8"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ve1mf8"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "HAS_AVX512_1_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ve1mf8'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_87c22.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:17 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\cmTC_87c22.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_87c22.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\Debug\\".
+          Creating directory "cmTC_87c22.dir\\Debug\\cmTC_87c22.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_87c22.dir\\Debug\\cmTC_87c22.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_87c22.dir\\Debug\\cmTC_87c22.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX512_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_87c22.dir\\Debug\\\\" /Fd"cmTC_87c22.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX512_1 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_87c22.dir\\Debug\\\\" /Fd"cmTC_87c22.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\src.c"
+          src.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\Debug\\cmTC_87c22.exe" /INCREMENTAL /ILK:"cmTC_87c22.dir\\Debug\\cmTC_87c22.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ve1mf8/Debug/cmTC_87c22.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ve1mf8/Debug/cmTC_87c22.lib" /MACHINE:X64  /machine:x64 cmTC_87c22.dir\\Debug\\src.obj
+          cmTC_87c22.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\Debug\\cmTC_87c22.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_87c22.dir\\Debug\\cmTC_87c22.tlog\\unsuccessfulbuild".
+          Touching "cmTC_87c22.dir\\Debug\\cmTC_87c22.tlog\\cmTC_87c22.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ve1mf8\\cmTC_87c22.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.80
+        
+      exitCode: 0
+    runResult:
+      variable: "HAS_AVX512_1_EXITCODE"
+      cached: true
+      stdout: |
+      stderr: |
+        Illegal instruction
+      exitCode: "FAILED_TO_RUN"
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceRuns.cmake:95 (try_run)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceRuns.cmake:52 (cmake_check_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:61 (check_c_source_runs)"
+      - "ggml/src/ggml-cpu/cmake/FindSIMD.cmake:95 (check_sse)"
+      - "ggml/src/ggml-cpu/CMakeLists.txt:170 (include)"
+      - "ggml/src/CMakeLists.txt:318 (ggml_add_cpu_backend_variant_impl)"
+    checks:
+      - "Performing Test HAS_AVX512_2"
+    directories:
+      source: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-l5j1y9"
+      binary: "T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-l5j1y9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "T:/projects/whisper.cpp/cmake/"
+    buildResult:
+      variable: "HAS_AVX512_2_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-l5j1y9'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_07362.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.10+8b8e13593 for .NET Framework
+        Build started 6/20/2025 4:40:18 PM.
+        
+        Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\cmTC_07362.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_07362.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\Debug\\".
+          Creating directory "cmTC_07362.dir\\Debug\\cmTC_07362.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_07362.dir\\Debug\\cmTC_07362.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_07362.dir\\Debug\\cmTC_07362.tlog\\unsuccessfulbuild".
+        VcpkgCheckManifestRoot:
+          The vcpkg manifest was disabled, but we found a manifest file in T:\\projects\\whisper.cpp\\. You may want to enable vcpkg manifests in your properties page or pass /p:VcpkgEnableManifest=true to the msbuild invocation.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX512_2 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /arch:AVX512 /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_07362.dir\\Debug\\\\" /Fd"cmTC_07362.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35209 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAS_AVX512_2 /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /arch:AVX512 /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_07362.dir\\Debug\\\\" /Fd"cmTC_07362.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\src.c"
+          src.c
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\Debug\\cmTC_07362.exe" /INCREMENTAL /ILK:"cmTC_07362.dir\\Debug\\cmTC_07362.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-l5j1y9/Debug/cmTC_07362.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"T:/projects/whisper.cpp/build/CMakeFiles/CMakeScratch/TryCompile-l5j1y9/Debug/cmTC_07362.lib" /MACHINE:X64  /machine:x64 cmTC_07362.dir\\Debug\\src.obj
+          cmTC_07362.vcxproj -> T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\Debug\\cmTC_07362.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_07362.dir\\Debug\\cmTC_07362.tlog\\unsuccessfulbuild".
+          Touching "cmTC_07362.dir\\Debug\\cmTC_07362.tlog\\cmTC_07362.lastbuildstate".
+        Done Building Project "T:\\projects\\whisper.cpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-l5j1y9\\cmTC_07362.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.87
+        
+      exitCode: 0
+    runResult:
+      variable: "HAS_AVX512_2_EXITCODE"
+      cached: true
+      stdout: |
+      stderr: |
+        Illegal instruction
+      exitCode: "FAILED_TO_RUN"
+...

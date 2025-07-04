@@ -1,7 +1,8 @@
 set(TARGET whisper-server)
 add_executable(${TARGET} server.cpp httplib.h)
 
-include(DefaultTargetOptions)
+include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
+set(TARGET ${TARGET})  # For legacy compatibility
 
 target_link_libraries(${TARGET} PRIVATE common json_cpp whisper ${CMAKE_THREAD_LIBS_INIT})
 

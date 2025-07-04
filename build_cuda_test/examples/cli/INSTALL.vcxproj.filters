@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="T:\projects\whisper.cpp\build_cuda_test\CMakeFiles\7a9b81ab286dec57508e5d1bab2f5204\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{561C4D77-DB6F-3D4F-81DB-1E63928B6794}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

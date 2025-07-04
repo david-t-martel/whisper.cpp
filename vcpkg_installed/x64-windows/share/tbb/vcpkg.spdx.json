@@ -1,0 +1,154 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/tbb-x64-windows-2022.0.0#2-b6d0d18a-6728-40d0-9d67-a35aa4dc0b27",
+  "name": "tbb:x64-windows@2022.0.0#2 51c33c04c39acd433959d2939ba0512960e9859244545d279531305168beb45d",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-2025-02-11-bec4296bf5289dc9ce83b4f5095943e44162f9c2"
+    ],
+    "created": "2025-06-21T05:31:57Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-2"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-3"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-2",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-3",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "tbb",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "2022.0.0#2",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg@7ba5ca689237e53e47f3c9375736ebf901e919ef",
+      "homepage": "https://github.com/oneapi-src/oneTBB",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "Intel's Threading Building Blocks.",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "tbb:x64-windows",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "51c33c04c39acd433959d2939ba0512960e9859244545d279531305168beb45d",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-0",
+      "name": "oneapi-src/oneTBB",
+      "downloadLocation": "git+https://github.com/oneapi-src/oneTBB@v2022.0.0",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "c87b84964b2c323f61895a532968dfa6413a774c177cffbf6e798a07e74e8da5d449144875771df0a1b02657eeb2a7ae4d41c6c432dbf7ea50e3d5a9ea9f8cd3"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": "./C:/codedev/vcpkg/buildtrees/versioning_/versions/tbb/7ba5ca689237e53e47f3c9375736ebf901e919ef/fix-gcc-without-gas.patch",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2ba9dabddd68b40c45a808637eb800ff943c4dca227a103e5fd171fc5c88ca79"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/codedev/vcpkg/buildtrees/versioning_/versions/tbb/7ba5ca689237e53e47f3c9375736ebf901e919ef/fix-lang.patch",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "53886eb5f8f412abdc59f6e38ea8b7fdf7f74a9c90f43a4aca51da5ed9fcef02"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/codedev/vcpkg/buildtrees/versioning_/versions/tbb/7ba5ca689237e53e47f3c9375736ebf901e919ef/portfile.cmake",
+      "SPDXID": "SPDXRef-file-2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2bd9e9548dbdc05580ff9b7b8ea8ff7673e9683adc382480716c55a2dc857dfb"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/codedev/vcpkg/buildtrees/versioning_/versions/tbb/7ba5ca689237e53e47f3c9375736ebf901e919ef/vcpkg.json",
+      "SPDXID": "SPDXRef-file-3",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5f36064988091d698905ee0a7c52c6d10cdf08d9fd456471bc96bf7b2601b850"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

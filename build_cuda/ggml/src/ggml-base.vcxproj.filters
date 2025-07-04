@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-alloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-backend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-opt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-threading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\ggml-quants.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\projects\whisper.cpp\ggml\src\gguf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\include\ggml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\include\ggml-alloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\include\ggml-backend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\include\ggml-cpp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\include\ggml-opt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\include\gguf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-threading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\projects\whisper.cpp\ggml\src\ggml-quants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="T:\projects\whisper.cpp\ggml\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{56EC45FF-0B3C-366B-A8E9-431007929D8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4B8ECB81-A93C-3D38-BC47-8147CBE3C925}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

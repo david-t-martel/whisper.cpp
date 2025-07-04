@@ -1,50 +1,98 @@
-# whisper.cpp for SYCL
+# Intel SYCL GPU Acceleration for whisper.cpp
 
-[Background](#background)
+This guide explains how to build and use whisper.cpp with Intel SYCL GPU acceleration on Windows and Linux.
 
-[OS](#os)
+## Table of Contents
 
-[Intel GPU](#intel-gpu)
-
-[Linux](#linux)
-
-[Environment Variable](#environment-variable)
-
-[Known Issue](#known-issue)
-
-[Todo](#todo)
+- [Background](#background)
+- [Prerequisites](#prerequisites)
+- [Quick Start (Windows)](#quick-start-windows)
+- [Quick Start (Linux)](#quick-start-linux)
+- [Supported Hardware](#supported-hardware)
+- [Advanced Building](#advanced-building)
+- [Performance Optimization](#performance-optimization)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
 
 ## Background
 
-SYCL is a higher-level programming model to improve programming productivity on various hardware accelerators�such as CPUs, GPUs, and FPGAs. It is a single-source embedded domain-specific language based on pure C++17.
+SYCL is a higher-level programming model to improve programming productivity on various hardware accelerators—such as CPUs, GPUs, and FPGAs. It is a single-source embedded domain-specific language based on pure C++17.
 
-oneAPI is a specification that is open and standards-based, supporting multiple architecture types including but not limited to GPU, CPU, and FPGA. The spec has both direct programming and API-based programming paradigms.
+oneAPI is a specification that is open and standards-based, supporting multiple architecture types including but not limited to GPU, CPU, and FPGA. Intel uses SYCL as direct programming language to support CPU, GPUs and FPGAs.
 
-Intel uses the SYCL as direct programming language to support CPU, GPUs and FPGAs.
+This implementation provides Intel GPU acceleration for whisper.cpp, leveraging Intel's oneAPI toolkit and SYCL runtime.
 
-To avoid  re-inventing the wheel, this code refers other code paths in llama.cpp (like OpenBLAS, cuBLAS, CLBlast). We use a open-source tool [SYCLomatic](https://github.com/oneapi-src/SYCLomatic) (Commercial release [Intel� DPC++ Compatibility Tool](https://www.intel.com/content/www/us/en/developer/tools/oneapi/dpc-compatibility-tool.html)) migrate to SYCL.
+## Prerequisites
 
-The whisper.cpp for SYCL is used to support Intel GPUs.
+### Intel oneAPI Toolkit
 
-For Intel CPU, recommend to use whisper.cpp for X86 (Intel MKL build).
+1. Download and install [Intel oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html)
+2. Optionally install [Intel oneAPI HPC Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html) for additional optimizations
+3. Default installation paths:
+   - Windows: `C:\Program Files (x86)\Intel\oneAPI`
+   - Linux: `/opt/intel/oneapi` or `~/intel/oneapi`
 
-## OS
+### Hardware Requirements
 
-|OS|Status|Verified|
-|-|-|-|
-|Linux|Support|Ubuntu 22.04|
-|Windows|Ongoing| |
+- **Intel GPU**: Intel Arc, Iris Xe, or newer integrated graphics
+- **CPU**: Intel SYCL also supports CPU execution as fallback
+- **Memory**: Sufficient GPU memory for model loading (varies by model size)
 
-
-## Intel GPU
+## Supported Hardware
 
 |Intel GPU| Status | Verified Model|
 |-|-|-|
-|Intel Data Center Max Series| Support| Max 1550|
-|Intel Data Center Flex Series| Support| Flex 170|
-|Intel Arc Series| Support| Arc 770|
-|Intel built-in Arc GPU| Support| built-in Arc GPU in Meteor Lake|
-|Intel iGPU| Support| iGPU in i5-1250P, i7-1165G7|
+|Intel Data Center Max Series| ✅ Support| Max 1550|
+|Intel Data Center Flex Series| ✅ Support| Flex 170|
+|Intel Arc Series| ✅ Support| Arc 770, Arc A380|
+|Intel built-in Arc GPU| ✅ Support| built-in Arc GPU in Meteor Lake|
+|Intel iGPU| ✅ Support| iGPU in i5-1250P, i7-1165G7|
+
+## Quick Start (Windows)
+
+### 1. Build with SYCL Support
+
+```powershell
+# Quick build (recommended)
+.\quick_sycl_build.ps1
+
+# Custom oneAPI path
+.\quick_sycl_build.ps1 -OneAPIRoot "C:\Path\To\oneAPI"
+
+# Clean build
+.\quick_sycl_build.ps1 -Clean
+
+# Debug build
+.\quick_sycl_build.ps1 -BuildType Debug
+```
+
+### 2. Validate Build
+
+```powershell
+# Run validation tests
+.\validate_sycl_build.ps1
+
+# With custom model and audio
+.\validate_sycl_build.ps1 -ModelPath "models\ggml-large.bin" -AudioFile "my_audio.wav"
+```
+
+### 3. List Available SYCL Devices
+
+```powershell
+.\build\examples\sycl\Release\ls-sycl-device.exe
+```
+
+### 4. Run Transcription
+
+```powershell
+# Basic transcription
+.\build\bin\Release\main.exe -m models\ggml-base.en.bin -f samples\jfk.wav
+
+# Force SYCL GPU usage
+.\build\bin\Release\main.exe -m models\ggml-base.en.bin -f samples\jfk.wav --sycl-gpu
+```
+
+## Quick Start (Linux)
 
 
 ## Linux
@@ -84,10 +132,10 @@ Platform #0: Intel(R) OpenCL HD Graphics
  `-- Device #0: Intel(R) Iris(R) Xe Graphics [0x9a49]
 ```
 
-2. Install Intel� oneAPI Base toolkit.
+2. Install Intel� oneAPI Base toolkit.
 
 
-a. Please follow the procedure in [Get the Intel� oneAPI Base Toolkit ](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html).
+a. Please follow the procedure in [Get the Intel� oneAPI Base Toolkit ](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html).
 
 Recommend to install to default folder: **/opt/intel/oneapi**.
 
@@ -247,3 +295,203 @@ Using device **0** (Intel(R) Arc(TM) A770 Graphics) as main device
 - Support to build in Windows.
 
 - Support multiple cards.
+### Setup Environment
+
+1. Install Intel GPU driver:
+   - Follow the official guide: [Install GPU Drivers](https://dgpu-docs.intel.com/driver/installation.html)
+   - For iGPU, install the client GPU driver
+   - Add user to groups: `video`, `render`
+
+2. Setup oneAPI environment:
+```bash
+# Source the oneAPI environment
+source /opt/intel/oneapi/setvars.sh
+
+# Or for user installation
+source ~/intel/oneapi/setvars.sh
+```
+
+### Build
+
+```bash
+# Configure with CMake
+cmake -B build -DWHISPER_SYCL=ON -DCMAKE_CXX_COMPILER=icpx -DCMAKE_C_COMPILER=icx
+
+# Build
+cmake --build build --config Release --parallel
+
+# List SYCL devices
+./build/examples/sycl/ls-sycl-device
+
+# Run transcription
+./build/bin/main -m models/ggml-base.en.bin -f samples/jfk.wav
+```
+
+## Advanced Building
+
+### Manual CMake Configuration (Windows)
+
+```powershell
+# Set up oneAPI environment (if not using scripts)
+& "C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
+
+# Configure
+cmake -B build -DWHISPER_SYCL=ON -DCMAKE_CXX_COMPILER=icpx -DCMAKE_C_COMPILER=icx
+
+# Build
+cmake --build build --config Release --parallel
+```
+
+### CMake Presets
+
+```powershell
+# List available presets
+cmake --list-presets
+
+# Use SYCL preset
+cmake --preset vs2022-sycl
+cmake --build --preset vs2022-sycl-release
+```
+
+### Build Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `WHISPER_SYCL` | Enable SYCL GPU acceleration | OFF |
+| `WHISPER_SYCL_F16` | Use FP16 precision | ON |
+| `CMAKE_CXX_COMPILER` | Set to `icpx` for Intel DPC++ | System default |
+| `CMAKE_C_COMPILER` | Set to `icx` for Intel compiler | System default |
+
+## Performance Optimization
+
+### Model Recommendations
+
+- **Base models**: Good balance of speed and accuracy
+- **Large models**: Better accuracy, requires more GPU memory
+- **Quantized models**: Faster inference, some accuracy trade-off
+
+### SYCL-Specific Options
+
+```bash
+# Use all available SYCL devices
+./main -m model.bin -f audio.wav --sycl-all
+
+# Specify work group size
+./main -m model.bin -f audio.wav --sycl-work-group-size 64
+
+# Enable profiling
+./main -m model.bin -f audio.wav --sycl-profile
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **"SYCL device not found"**
+   - Verify Intel GPU drivers are installed
+   - Check device availability with `ls-sycl-device`
+   - Ensure oneAPI environment is properly set up
+
+2. **Build fails with compiler errors**
+   - Verify Intel DPC++ compiler is in PATH
+   - Check oneAPI toolkit installation
+   - Try clean build
+
+3. **Runtime errors**
+   - Ensure sufficient GPU memory
+   - Try CPU fallback with `--sycl-cpu`
+   - Check model file integrity
+
+### Debug Build
+
+```powershell
+# Windows
+.\quick_sycl_build.ps1 -BuildType Debug
+
+# Linux
+cmake -B build -DWHISPER_SYCL=ON -DCMAKE_BUILD_TYPE=Debug
+```
+
+### Environment Variables
+
+```bash
+# Enable SYCL debugging
+export SYCL_PI_TRACE=1
+
+# Set device selection
+export SYCL_DEVICE_FILTER=gpu
+
+# Force specific platform
+export SYCL_PLATFORM_FILTER=level_zero
+```
+
+## Benchmarking
+
+### Windows
+
+```powershell
+# Comprehensive benchmark
+.\benchmark_whisper.ps1 -Config "Intel SYCL"
+
+# Custom benchmark
+.\test_sycl_build.ps1 -RunBenchmark
+```
+
+### Compare Performance
+
+```bash
+# CPU vs SYCL comparison
+./main -m model.bin -f audio.wav -t 1          # CPU
+./main -m model.bin -f audio.wav --sycl-gpu    # SYCL GPU
+```
+
+## oneAPI Libraries Used
+
+- **Intel DPC++**: SYCL compiler and runtime
+- **Intel MKL**: Math Kernel Library for optimized linear algebra
+- **Intel TBB**: Threading Building Blocks for parallelization
+- **Intel IPP**: Integrated Performance Primitives for signal processing
+- **Level Zero**: GPU driver interface (automatic)
+
+## Known Issues
+
+- Windows support is actively being improved
+- Some Intel GPU models may have limited FP16 support
+- Memory allocation can be optimized further for large models
+
+## Contributing
+
+When contributing SYCL-related changes:
+1. Test on both Intel GPU and CPU backends
+2. Ensure compatibility with different Intel GPU generations
+3. Update documentation and build scripts as needed
+4. Follow SYCL best practices for performance
+
+## Support and Resources
+
+- [Intel oneAPI Documentation](https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2024-0/intel-oneapi-programming-guide.html)
+- [SYCL Specification](https://www.khronos.org/sycl/)
+- [Intel GPU Drivers](https://www.intel.com/content/www/us/en/support/articles/000005629/graphics.html)
+- [whisper.cpp SYCL Issues](https://github.com/ggerganov/whisper.cpp/issues)## vcpkg Integration Status
+
+✅ **vcpkg dependencies are fully integrated and working!**
+
+The project now supports clean vcpkg-only builds with the `ninja-vcpkg-clean` preset:
+
+```bash
+# Configure and build with vcpkg dependencies only
+cmake --preset ninja-vcpkg-clean
+cmake --build --preset ninja-vcpkg-clean-build -j 2
+```
+
+**Enabled vcpkg libraries:**
+- ✅ libsndfile (audio I/O)
+- ✅ SDL2 (audio streaming)
+- ✅ curl (HTTP client)
+- ✅ cpprestsdk (REST API)
+- ✅ boost-stacktrace (debugging)
+- ✅ taskflow (task parallelism)
+
+**Note:** Intel oneAPI and vcpkg can be used independently. Use `ninja-vcpkg-clean` for vcpkg-only builds to avoid conflicts.
+
+For detailed test results, see [VCPKG_INTEGRATION_TEST.md](./VCPKG_INTEGRATION_TEST.md).

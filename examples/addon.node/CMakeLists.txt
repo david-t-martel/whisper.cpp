@@ -10,7 +10,7 @@ include_directories(${CMAKE_JS_INC})
 add_library(${TARGET} SHARED ${CMAKE_JS_SRC} addon.cpp)
 set_target_properties(${TARGET} PROPERTIES PREFIX "" SUFFIX ".node")
 
-include(DefaultTargetOptions)
+include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
 
 # Include N-API wrappers
 #==================================================================

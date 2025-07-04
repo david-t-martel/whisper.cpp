@@ -56,12 +56,12 @@ add_library(${TARGET} STATIC
     common.cpp
     common-ggml.h
     common-ggml.cpp
-    grammar-parser.h
-    grammar-parser.cpp
+    grammar-parser.h    grammar-parser.cpp
     ${COMMON_SOURCES_FFMPEG}
     )
 
-include(DefaultTargetOptions)
+include(${CMAKE_SOURCE_DIR}/cmake/DefaultTargetOptions.cmake)
+set(TARGET ${TARGET})  # For legacy compatibility
 
 target_link_libraries(${TARGET} PRIVATE whisper ${COMMON_EXTRA_LIBS})
 
@@ -78,7 +78,7 @@ if (WHISPER_SDL2)
         common-sdl.cpp
         )
 
-    include(DefaultTargetOptions)
+    # include(DefaultTargetOptions.cmake)
 
     target_include_directories(${TARGET} PUBLIC  ${SDL2_INCLUDE_DIRS})
     target_link_libraries     (${TARGET} PRIVATE ${SDL2_LIBRARIES})
